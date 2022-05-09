@@ -5,6 +5,7 @@ import lombok.*;
 import org.hibernate.Hibernate;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -26,10 +27,12 @@ public class Institute {
     private String director;
     private String contacts;
 
-    /*  @OneToMany(cascade = CascadeType.ALL, mappedBy = "institute")
-      @ToString.Exclude
-      private List<Direction> directions;*/
-
+    /*@OneToMany(cascade = CascadeType.ALL, mappedBy = "institute")
+    private List<Direction> directions;
+*/
+    @OneToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @JoinColumn(name = "image_id", referencedColumnName = "id")
+    private Image image;
 
     @Override
     public boolean equals(Object o) {

@@ -18,7 +18,10 @@ public class Direction {
     private Long id;
     private String abbr;
     private String title;
-  /*  @ManyToOne
-    @JoinColumn(name = "user_id")
-    private Institute institute;*/
+/*
+    @ManyToOne
+    @JoinColumn(name = "institute_id")
+    private Institute institute;
+*/
+
 }

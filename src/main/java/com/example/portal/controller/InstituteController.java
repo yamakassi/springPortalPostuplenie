@@ -9,6 +9,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
 
 @Controller
 //@RequestMapping("/portal")
@@ -27,13 +31,14 @@ public class InstituteController {
     public String instituteInfo(@PathVariable String abbr,Model model){
 
         model.addAttribute("institute",instituteService.getInstituteByTitle(abbr));
+
         return "institute-info";
     }
 
     @PostMapping("/institute/create")
-    public  String createInstitute(Institute institute){
+    public  String createInstitute(@RequestParam("file") MultipartFile file, Institute institute) throws IOException {
 
-        instituteService.saveInstitute(institute);
+        instituteService.saveInstitute(institute,file);
         return  "redirect:/";
     }
 

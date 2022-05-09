@@ -1,12 +1,15 @@
 package com.example.portal.services;
 
+import com.example.portal.domain.Image;
 import com.example.portal.domain.Institute;
 
 import com.example.portal.repositories.InstituteRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,7 +24,14 @@ public class InstituteService {
         return instituteRepo.findAll();
     }
 
-    public void saveInstitute(Institute institute) {
+    public void saveInstitute(Institute institute, MultipartFile file) throws IOException {
+        Image image;
+        if(!file.isEmpty()){
+            image = ImageService.toImageEntity(file);
+            institute.setImage(image);
+            image.setInstitute(institute);
+        }
+        
         instituteRepo.save(institute);
     }
     @Transactional

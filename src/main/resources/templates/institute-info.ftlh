@@ -13,13 +13,14 @@
 <h5>Информация</h5>
 <hr>
 <b>Название института</b>${institute.title}<br>
+<img src="/images/${institute.image.id}" height="70px" >
 <b>Описание института</b>${institute.description}<br>
 <b>Директор института</b>${institute.director}<br>
 <b>Контакты института</b>${institute.contacts}<br>
 <b>Направления института</b>
 
 
-<form action="/institute/delete/${institute.getAbbr()}" method="post">
+<form action="/institute/delete/${institute.getAbbr()}" method="post" >
 
     <input type="submit" value="удалить">
 </form>
