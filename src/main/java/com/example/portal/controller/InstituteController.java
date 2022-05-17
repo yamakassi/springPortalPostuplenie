@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.security.Principal;
 
 @Controller
 //@RequestMapping("/portal")
@@ -22,9 +23,10 @@ public class InstituteController {
 
 
 
-    @GetMapping
-    public String portal(Model model) {
+    @GetMapping()
+    public String portal(Principal principal, Model model) {
         model.addAttribute("institute", instituteService.list());
+        model.addAttribute("user", instituteService.getUserByPrincipal(principal));
         return "portal";
     }
     @GetMapping("/institute/{abbr}")

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Spring Security Example </title>
+    <div th:replace="fragments/header :: header-css"/>
+</head>
+<body>
+
+<div th:replace="fragments/header :: header"/>
+
+<div class="container">
+
+    <h1>Пользователь <span th:text="${user.email}"></span></h1>
+    <hr>
+    <h5>Информация</h5>
+    <hr>
+</div>
+
+<div th:replace="fragments/footer :: footer"/>
+
+</body>
+</html>

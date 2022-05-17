@@ -5,6 +5,7 @@ import lombok.*;
 import org.hibernate.Hibernate;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -26,10 +27,10 @@ public class Institute {
     private String description;
     private String director;
     private String contacts;
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY,
+            mappedBy = "institute")
+    private List<Direction> directions = new ArrayList<>();
 
-    /*@OneToMany(cascade = CascadeType.ALL, mappedBy = "institute")
-    private List<Direction> directions;
-*/
     @OneToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     @JoinColumn(name = "image_id", referencedColumnName = "id")
     private Image image;

@@ -11,6 +11,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class UserService  {
@@ -19,12 +21,26 @@ public class UserService  {
     @Autowired
     public PasswordEncoder passwordEncoder;
     public boolean createUser(User user){
-        if(userRepo.findByEmail(user.getEmail())!=null) return  false;
+        if(!userRepo.findByEmail(user.getEmail()).isEmpty()) {
+
+            return  false;
+        }
         user.setActive((true));
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        user.getRoles().add(Role.ROLE_USER);
+        user.getRoles().add(Role.ROLE_ADMIN);
         userRepo.save(user);
         return true;
+    }
+    public List<User> allUsers(){
+        return userRepo.findAll();
+    }
+    public void disableUser(Long id){
+        User user = userRepo.findById(id).orElse(null);
+        if(user !=null){
+            user.setActive(false);
+        }
+        userRepo.save(user);
+
     }
 /*
     @Override

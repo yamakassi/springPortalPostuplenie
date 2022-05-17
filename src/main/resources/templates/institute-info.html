@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Spring Security Example </title>
+    <div th:replace="fragments/header :: header-css"/>
+</head>
+<body>
+
+<div th:replace="fragments/header :: header"/>
+
+<div class="container">
+
+    <h1>Об институте</h1>
+    <hr>
+    <h5>Информация</h5>
+    <hr>
+    <span th:text=""></span>
+    <b>Название института</b><span th:text="${institute.title}"></span><br>
+    <img src="/images/${institute.image.id}" height="70px">
+    <b>Описание института</b><span th:text="${institute.description}"></span><br>
+    <b>Директор института</b><span th:text="${institute.director}"></span><br>
+    <b>Контакты института</b><span th:text="${institute.contacts}"></span><br>
+    <b>Направления института</b>
+</div>
+
+<div th:replace="fragments/footer :: footer"/>
+
+</body>
+</html>

@@ -24,11 +24,12 @@ public class Image {
     private Long size;
     private String type;
 
-
+    @Column(length = 10000)
     private byte[] bytes;
 
     @OneToOne(mappedBy = "image")
     private Institute institute;
+    @Column(name = "dateCreated")
     private LocalDateTime dateCreated;
 
     @PrePersist
