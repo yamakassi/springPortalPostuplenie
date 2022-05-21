@@ -1,7 +1,9 @@
 package com.example.portal.services;
 
+import com.example.portal.domain.Exam;
 import com.example.portal.domain.User;
 import com.example.portal.domain.enums.Role;
+import com.example.portal.repositories.ExamRepo;
 import com.example.portal.repositories.UserRepo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +13,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.security.Principal;
 import java.util.List;
 
 @Service
@@ -18,6 +21,8 @@ import java.util.List;
 public class UserService  {
     @Autowired
     private UserRepo userRepo;
+    @Autowired
+    private ExamRepo examRepo;
     @Autowired
     public PasswordEncoder passwordEncoder;
     public boolean createUser(User user){
@@ -42,6 +47,18 @@ public class UserService  {
         userRepo.save(user);
 
     }
+    public User getUserByPrincipal(Principal principal) {
+        if (principal == null) return new User();
+        return userRepo.findByEmail(principal.getName()).get();
+    }
+    public void saveExams(List<Exam> exams){
+       for(Exam exam : exams) {
+
+           examRepo.save(exam);
+       }
+    }
+
+
 /*
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {

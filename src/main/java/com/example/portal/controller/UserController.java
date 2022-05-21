@@ -1,5 +1,7 @@
 package com.example.portal.controller;
 
+import com.example.portal.ExamsDTO;
+import com.example.portal.domain.Exam;
 import com.example.portal.domain.User;
 import com.example.portal.services.UserService;
 import lombok.Getter;
@@ -10,6 +12,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import java.security.Principal;
+import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -22,13 +27,13 @@ public class UserController {
         return "login";
 
     }
- /*   @GetMapping("/profile")
+    @GetMapping("/profile")
     public String profile(Principal principal,
                           Model model) {
         User user = userService.getUserByPrincipal(principal);
         model.addAttribute("user", user);
         return "profile";
-    }*/
+    }
     @GetMapping("/registration")
     public String registration() {
         return "registration";
@@ -45,14 +50,25 @@ public class UserController {
     }
     @GetMapping("/user/{user}")
     public String userInfo(@PathVariable("user") User user, Model model) {
-        System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@");
-        System.out.println(user);
-        model.addAttribute("user", user);
 
+        model.addAttribute("user", user);
+    model.addAttribute("exams", new ExamsDTO());
        // model.addAttribute("user-", user);
 
         return "user-info";
 
+    }
+    @PostMapping("/user/{user}/app/create")
+    public  String createDirection(ExamsDTO examsDTO, @PathVariable("user") User user)  {
+
+
+        List<Exam> exams= examsDTO.transferExam(user);
+
+        userService.saveExams(exams);
+
+
+        //directionService.saveDirection(direction,instAbbr);
+        return  "hello";
     }
 
 }

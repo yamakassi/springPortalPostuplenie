@@ -10,10 +10,32 @@
 
 <div class="container">
 
-    <a href="/login">Войти</a>
-</div>
+    <h5>Направления</h5>
+
+    <div th:each="inst:${institute}">
+        <p th:text="${inst.title}"></p>
+        <span th:text="${inst.description}">        </span>
+
+        <a th:href="@{/institute/{abbr}(abbr=${inst.getAbbr()})}">об</a>
+    </div>
+
+
+<!-- перенос в superAdmin panel -->
+<h3>Добавить институт</h3>
+<form th:action="@{/institute/create}" method="post" enctype="multipart/form-data">
+    Название института : <input type="text" name="title">
+    Сокращение института : <input type="text" name="abbr">
+    Описание : <input type="text" name="description">
+    Директор института : <input type="text" name="director">
+    Контакты звание института : <input type="text" name="contacts">
+    Фото: <input type="file" name="file">
+    <input type="hidden" name="_csrf" value="${_csrf.token}">
+    <input type="submit" value="добавить">
+</form>
+
+
 
 <div th:replace="fragments/footer :: footer"/>
-
+</div>
 </body>
 </html>

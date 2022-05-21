@@ -32,7 +32,7 @@ public class InstituteController {
     @GetMapping("/institute/{abbr}")
     public String instituteInfo(@PathVariable String abbr,Model model){
 
-        model.addAttribute("institute",instituteService.getInstituteByTitle(abbr));
+        model.addAttribute("institute",instituteService.getInstituteByAbbr(abbr));
 
         return "institute-info";
     }

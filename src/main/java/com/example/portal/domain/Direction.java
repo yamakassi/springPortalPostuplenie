@@ -11,7 +11,6 @@ import java.util.List;
 @Table
 @Getter
 @Setter
-@ToString
 @RequiredArgsConstructor
 @AllArgsConstructor
 public class Direction {
@@ -25,8 +24,19 @@ public class Direction {
     private List<Application> applications = new ArrayList<>();
 
     @ManyToOne(cascade = CascadeType.REFRESH)
-    //@JoinColumn(name = "institute_id")
+    @JoinColumn
     private  Institute institute;
+
+    @Override
+    public String toString() {
+        return "Direction{" +
+                "id=" + id +
+                ", abbr='" + abbr + '\'' +
+                ", title='" + title + '\'' +
+                ", applications=" + applications +
+                '}';
+    }
+
 /*
     @ManyToOne
     @JoinColumn(name = "institute_id")

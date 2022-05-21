@@ -12,8 +12,80 @@
 
     <h1>Пользователь <span th:text="${user.email}"></span></h1>
     <hr>
+    <div th:each="exam: ${user.exams}">
+       <div> <span th:text="${exam.nameExam}"></span>
+        <span th:text="${exam.valueExam}"></span></div>
+    </div>
     <h5>Информация</h5>
     <hr>
+
+    <b>Добавить экзамены</b>
+    <form th:action="@{/user/{id}/app/create(id=${user.getId()})}" th:object="${exams}" method="post">
+        <div>
+            <div>
+                <div><label
+                ><input type="checkbox" value="math" name="nameExamDTO" th:field="*{nameExamDTO}"
+                >
+                    <div>математика</div>
+                </label>
+                    <div>
+                        <label>Балл</label>
+                        <div><input name="valueExamDTO" th:field="*{valueExamDTO}"
+                                    pattern="[0-9]*"
+                        >
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div><label
+                ><input type="checkbox" value="rus" name="nameExamDTO" th:field="*{nameExamDTO}"
+                >
+                    <div>русский</div>
+                </label>
+                    <div>
+                        <label>Балл</label>
+                        <div><input name="valueExamDTO" th:field="*{valueExamDTO}"
+                                    pattern="[0-9]*"
+                        >
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--
+            <div >
+                <div ><label
+                        ><input type="checkbox" value="egeAddExam" id="ck2"
+                                                                          name="egeAddExam"
+                                                                          >
+                    <div >Сдам дополнительный экзамен</div>
+                </label>
+                    <div >
+                        <div >
+                            <div >На некоторые специальности помимо ЕГЭ
+                                необходимо сдать дополнительные профессиональные или творческие экзамены в вузе.
+                            </div>
+                        </div>
+                        <svg >
+                            <use xlink:href="#icon__help"></use>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>-->
+            <div spacing="xlarge"></div>
+            <div>
+                <div>
+                    <button color="blue" shape="rectangle" type="submit"
+                    ><span
+                    >Зарегистрироваться и подобрать вузы</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
 </div>
 
 <div th:replace="fragments/footer :: footer"/>

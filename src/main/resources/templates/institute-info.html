@@ -10,19 +10,48 @@
 
 <div class="container">
 
-    <h1>Об институте</h1>
+   <h1>Об институте</h1>
     <hr>
     <h5>Информация</h5>
     <hr>
-    <span th:text=""></span>
-    <b>Название института</b><span th:text="${institute.title}"></span><br>
-    <img src="/images/${institute.image.id}" height="70px">
-    <b>Описание института</b><span th:text="${institute.description}"></span><br>
-    <b>Директор института</b><span th:text="${institute.director}"></span><br>
-    <b>Контакты института</b><span th:text="${institute.contacts}"></span><br>
-    <b>Направления института</b>
-</div>
 
+    <b>Название института: </b><span th:text="${institute.title}"></span><br>
+    <img th:src="@{/images/{id}(id=${institute.getImage().getId()})}" height="70px">
+    <b>Описание института: </b><span th:text="${institute.description}"></span><br>
+    <b>Директор института: </b><span th:text="${institute.director}"></span><br>
+    <b>Контакты института: </b><span th:text="${institute.contacts}"></span><br>
+    <b>Направления института: </b>
+    <div th:each="direction:${institute.directions}">
+        <a th:href="@{/institute/{instAbbr}/direction/{dirAbbr}(instAbbr=${institute.abbr},
+                                                               dirAbbr=${direction.abbr})}">
+            <span th:text="${direction.title}"></span>
+        </a>
+        <span th:text="${direction.abbr}"></span>
+
+    </div>
+
+
+<div>
+
+    <h5>Добавить направление</h5>
+
+    <form th:action="@{/institute/{abbr}/direction/create(abbr=${institute.abbr})}"
+                 method="post" enctype="multipart/form-data">
+        Название направления  : <input type="text" name="title">
+        Сокращение направления : <input type="text" name="abbr">
+
+
+        <input type="submit" value="добавить">
+    </form>
+    <!--
+    Описание : <input type="text" name="description">
+        Директор института : <input type="text" name="director">
+        Контакты звание института : <input type="text" name="contacts">
+        Фото: <input type="file" name="file">
+     private String abbr;
+    private String title;-->
+</div>
+</div>
 <div th:replace="fragments/footer :: footer"/>
 
 </body>

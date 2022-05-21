@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <title>Spring Security Example </title>
+    <div th:replace="fragments/header :: header-css"/>
+</head>
+<body>
+
+<div th:replace="fragments/header :: header"/>
+
+<div class="container">
+
+    <h1 style="text-align: center">Личный кабинет</h1>
+    <hr>
+    <br>
+    <div style="text-align: center">
+        <img th:src="@{/static/images/avatar.png}"
+             style="border:2px solid black; border-radius: 20px" height="120">
+        <br>
+        <br>
+
+        <br>
+        Электоронная почта: <b th:text="${user.email}"></b>
+        <br>
+        Номер телефона: <b th:text="${user.phoneNumber}"></b>
+        <br>
+        <br>
+        <div sec:authorize="isAuthenticated()">
+        <a class="btn btn-dark mb-3" style="text-align: center; width: 100%"
+           href="/admin">
+            Панель администратора
+        </a><br>
+    </div>
+
+</div>
+</div>
+
+<div th:replace="fragments/footer :: footer"/>
+
+</body>
+</html>
