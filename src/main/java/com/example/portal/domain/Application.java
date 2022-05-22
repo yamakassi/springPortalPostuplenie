@@ -4,7 +4,9 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Data
@@ -13,14 +15,22 @@ public class Application {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String snils;
-    //List<Exam> exams = new ArrayList<>();;
+    @ManyToMany
+    @JoinTable(name = "direction_application",
+            joinColumns = { @JoinColumn(name = "id_application") },
+            inverseJoinColumns = { @JoinColumn(name = "id_direction") })
+    private Set<Direction> directions = new HashSet<>();
 
 
-    @ManyToOne(cascade = CascadeType.REFRESH)
-    private Direction direction;
-    @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
-    @JoinColumn
+
+    @OneToOne(mappedBy = "application")
     private User user;
     private boolean registered = false;
     private LocalDateTime dateOfCreated;
+
+    @PrePersist
+    private void init(){
+        dateOfCreated = LocalDateTime.now();
+    }
+
 }

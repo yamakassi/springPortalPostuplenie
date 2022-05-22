@@ -9,12 +9,14 @@
 <div th:replace="fragments/header :: header"/>
 
 <div class="container">
+    <h6>Списки поступающих</h6>
+<div th:each="app: ${applications}">
 
-    <h1>Направление <span th:text="${direction.title}"></span></h1>
+    <span th:text="${app.snils}"></span>
+    <span th:text="${app.user.email}"></span>
+    <span th:text="${app.registered}"></span>
 
-    <hr
-
-
+</div>
 </div>
 
 <div th:replace="fragments/footer :: footer"/>

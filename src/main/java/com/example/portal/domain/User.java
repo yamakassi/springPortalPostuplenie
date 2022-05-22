@@ -32,14 +32,18 @@ public class User implements UserDetails {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "image_id")
     private Image avatar;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "application_id", referencedColumnName = "id")
+    private Application application;
     @Column(columnDefinition = "text")
     private String password;
-    @ElementCollection(targetClass = Role.class,fetch = FetchType.EAGER)
+    @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
     @CollectionTable(name = "user_role",
             joinColumns = @JoinColumn(name = "user_id"))
     @Enumerated(EnumType.STRING)
     private Set<Role> roles = new HashSet<>();
     private LocalDateTime dateOfCreated;
+
     @PrePersist
     private void init() {
         dateOfCreated = LocalDateTime.now();
@@ -58,7 +62,11 @@ public class User implements UserDetails {
     public int hashCode() {
         return getClass().hashCode();
     }
-    public  boolean isAdmin(){ return  roles.contains(Role.ROLE_ADMIN);}
+
+    public boolean isAdmin() {
+        return roles.contains(Role.ROLE_ADMIN);
+    }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return roles;

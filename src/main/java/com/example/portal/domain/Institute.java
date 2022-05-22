@@ -31,7 +31,7 @@ public class Institute {
             mappedBy = "institute")
     private List<Direction> directions = new ArrayList<>();
 
-    @OneToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "image_id", referencedColumnName = "id")
     private Image image;
 

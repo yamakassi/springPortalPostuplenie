@@ -1,5 +1,6 @@
 package com.example.portal.services;
 
+import com.example.portal.domain.Application;
 import com.example.portal.domain.Exam;
 import com.example.portal.domain.User;
 import com.example.portal.domain.enums.Role;
@@ -56,6 +57,10 @@ public class UserService  {
 
            examRepo.save(exam);
        }
+    }
+    public  void addApplication(User user, Application application){
+        user.setApplication(application);
+        userRepo.save(user);
     }
 
 

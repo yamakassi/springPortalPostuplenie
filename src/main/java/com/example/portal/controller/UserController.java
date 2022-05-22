@@ -68,7 +68,7 @@ public class UserController {
 
 
         //directionService.saveDirection(direction,instAbbr);
-        return  "hello";
+        return  "user-info";
     }
 
 }

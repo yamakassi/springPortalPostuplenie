@@ -5,7 +5,9 @@ import lombok.*;
 import javax.persistence.*;
 import javax.persistence.criteria.CriteriaBuilder;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table
@@ -19,13 +21,23 @@ public class Direction {
     private Long id;
     private String abbr;
     private String title;
-    @OneToMany(cascade = CascadeType.ALL,
-            mappedBy = "direction")
-    private List<Application> applications = new ArrayList<>();
+    @ManyToMany(mappedBy = "directions")
+    private Set<Application> applications = new HashSet<>();
 
     @ManyToOne(cascade = CascadeType.REFRESH)
     @JoinColumn
     private  Institute institute;
+
+
+    public void addApplication(Application appl) {
+        this.applications.add(appl);
+
+    }
+
+    public void removeApplication(Application appl) {
+        this.applications.remove(appl);
+        appl.getDirections().remove(this);
+    }
 
     @Override
     public String toString() {
@@ -34,13 +46,11 @@ public class Direction {
                 ", abbr='" + abbr + '\'' +
                 ", title='" + title + '\'' +
                 ", applications=" + applications +
+                ", institute=" + institute.getAbbr() +
+
                 '}';
     }
 
-/*
-    @ManyToOne
-    @JoinColumn(name = "institute_id")
-    private Institute institute;
-*/
+
 
 }

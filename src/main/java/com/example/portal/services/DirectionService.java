@@ -1,5 +1,6 @@
 package com.example.portal.services;
 
+import com.example.portal.domain.Application;
 import com.example.portal.domain.Direction;
 import com.example.portal.domain.Image;
 import com.example.portal.repositories.DirectionRepo;
@@ -40,4 +41,6 @@ public class DirectionService {
 
         directionRepo.save(direction);
     }
+
+
 }
