@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Spring Security Example </title>
+    <div th:replace="fragments/header :: header-css"/>
+</head>
+<body>
+
+<div th:replace="fragments/header :: header"/>
+
+<div class="wrapper" style="overflow: hidden; height: auto; min-height: 100%;">
+    <!-- Left side column. contains the sidebar -->
+    <aside th:replace="fragments/lev-sitebar :: lev-sitebar"/>
+    <div class="content-wrapper" style="min-height: 368px;">
+        <section class="content-header">
+            <h1>
+                Дополнительные сведения
+
+            </h1>
+
+        </section>
+        <section class="content">
+
+
+            <div class="row">
+                <div class="col-md-11 col-xs-12">
+
+                    <form class="form-horizontal" action="AddInfo" method="post">
+
+
+                        <div class="form-group">
+                            <div class="col-xs-12">
+                                <h4>Право на льготы:</h4>
+                                <span class="text-danger">(только для граждан РФ и соотечественников, поступающих на равных правах с гражданами РФ на образовательные программы общего образования, бакалавриата и специалитета)</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-xs-12">
+                                <label>
+                                    <input data-val="true" data-val-required="Требуется поле HasPrivileges."
+                                           id="HasPrivileges" name="HasPrivileges" type="checkbox" value="true"><input
+                                        name="HasPrivileges" type="hidden" value="false">
+                                    Претендую на особые права
+                                </label>
+                                <i id="privilegesTooltip" class="fa fa-question-circle"
+                                   onclick="showTooltipMessage()"></i>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div id="privilegesTooltipMessage" class="alert alert-info alert-dismissable"
+                                     style="display:none;">
+                                    <button type="button" class="close" onclick="closeTooltipMessage()">×</button>
+                                    <p>Пожалуйста, отметьте данный пункт, если вы претендуете на поступление <b>в рамках
+                                        особой квоты</b> или претендуете <b>на преимущественное право при зачислении</b>
+                                    </p>
+                                    <p>Для поступающих на программы <b>бакалавриата/специалитета</b></p>
+                                    <p style="padding-left:20px;">Право на прием на обучение <b>в пределах особой
+                                        квоты</b> имеют дети-инвалиды, инвалиды I и II групп, инвалиды с детства,
+                                        инвалиды вследствие военной травмы или заболевания, полученных в период
+                                        прохождения военной службы, дети-сироты и дети, оставшиеся без попечения
+                                        родителей, а также лица из числа детей-сирот и детей, оставшихся без попечения
+                                        родителей, и ветераны боевых действий из числа лиц, указанных в подпунктах 1 - 4
+                                        пункта 1 статьи 3 Федерального закона от 12 января 1995 г. №5-ФЗ «О ветеранах»
+                                        (п. 2.7 Правил приема)</p>
+                                    <p style="padding-left:20px;">Все категории лиц, которым предоставляется <b>преимущественное
+                                        право при зачислении,</b> перечислены в п. 2.8. Правил приема.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-xs-12">
+                                <h4>Целевая квота:</h4>
+                                <span class="text-danger">(только для граждан РФ и соотечественников, поступающих на равных правах с гражданами РФ на образовательные программы высшего образования – бакалавриат, специалитет, магистратура, аспирантура и ординатура)</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-xs-12">
+                                <label>
+                                    <input data-val="true" data-val-required="Требуется поле HasCelCompetition."
+                                           id="HasCelCompetition" name="HasCelCompetition" type="checkbox" value="true"><input
+                                        name="HasCelCompetition" type="hidden" value="false">
+                                    Поступаю на места в рамках целевой квоты
+                                </label>
+                            </div>
+                        </div>
+
+
+                        <div style="display:none">
+                            <div class="form-group">
+                                <div class="col-xs-12">
+                                    <h4>Сертификат ТРКИ</h4>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-xs-12">
+                                    <label>
+                                        <input data-val="true" data-val-required="Требуется поле HasTRKI." id="HasTRKI"
+                                               name="HasTRKI" type="checkbox" value="true"><input name="HasTRKI"
+                                                                                                  type="hidden"
+                                                                                                  value="false">
+                                        Есть сертификат ТРКИ
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="_trkiBlock" style="display:none">
+                            <div id="_TRKICertificateNumber" class="form-group">
+                                <div class="col-xs-12">
+                                    <input class="form-control" id="TRKICertificateNumber" name="TRKICertificateNumber"
+                                           placeholder="Номер сертификата" type="text" value="">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-xs-12">
+                                    <label>Уровень владения языком</label>
+                                </div>
+                                <div class="col-xs-12">
+                                    <select class="form-control" data-val="true"
+                                            data-val-number="Значением поля TRKILevelId должно быть число."
+                                            data-val-required="Требуется поле TRKILevelId." id="TRKILevelId"
+                                            name="TRKILevelId">
+                                        <option value="1">ТРКИ-I</option>
+                                        <option value="2">ТРКИ-II</option>
+                                        <option value="3">ТРКИ-III</option>
+                                        <option value="4">ТРКИ-IV</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-xs-12">
+                                    <label>Организация, выдавшая сертификат</label>
+                                </div>
+                                <div class="col-xs-12">
+                                    <select class="form-control" data-val="true"
+                                            data-val-number="Значением поля TRKIIssuerOrg должно быть число."
+                                            data-val-required="Требуется поле TRKIIssuerOrg." id="TRKIIssuerOrg"
+                                            name="TRKIIssuerOrg">
+                                        <option value="1">fff</option>
+                                        <option value="2">РГПУ им. А.И. Герцена</option>
+                                        <option value="3">Гос. ИРЯ им. А.С. Пушкина</option>
+                                        <option value="4">f</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-xs-12">
+                                <h4>Особые условия</h4>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-xs-12">
+                                <label>
+                                    <input data-val="true" data-val-required="Требуется поле NeedSpecialConditions."
+                                           id="NeedSpecialConditions" name="NeedSpecialConditions" type="checkbox"
+                                           value="true"><input name="NeedSpecialConditions" type="hidden" value="false">
+                                    Нуждаюсь в создании особых условий при прохождении вступительных испытаний
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-xs-12">
+                                <textarea class="form-control noresize" cols="85" id="ExtraInfo" name="ExtraInfo"
+                                          placeholder="О себе сообщаю:" rows="5"></textarea>
+                                <span id="ExtraInfo_Message" class="field-validation-valid text-danger"
+                                      style="display:none">
+                </span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-xs-12">
+                                <h4>Я подтверждаю, что предоставленная мной информация корректна и достоверна. Даю
+                                    согласие на обработку предоставленных персональных данных в порядке, установленном
+                                    Федеральным законом от 27 июля 2006 года № 152-ФЗ «О персональных данных».</h4>
+                            </div>
+                        </div>
+
+                        <input data-val="true" data-val-required="Требуется поле FZ_152Agree." id="FZ_152Agree"
+                               name="FZ_152Agree" type="hidden" value="True">
+                        <div class="form-group">
+                            <div class="col-md-offset-9 col-md-3 col-xs-10">
+                                <button type="submit" class="btn btn-block btn-success">
+                                    Продолжить
+                                    <span class="glyphicon glyphicon-menu-right"></span>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+
+        </section>
+    </div>
+
+</div>
+
+<div th:replace="fragments/footer :: footer"/>
+
+</body>
+</html>

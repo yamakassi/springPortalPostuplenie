@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Spring Security Example </title>
+    <div th:replace="fragments/header :: header-css"/>
+</head>
+<body>
+
+<div th:replace="fragments/header :: header"/>
+
+<div class="wrapper" style="overflow: hidden; height: auto; min-height: 100%;">
+    <!-- Left sidebar -->
+    <aside th:replace="fragments/lev-sitebar :: lev-sitebar"/>
+
+    <div class="content-wrapper" style="min-height: 368px;">
+        <section class="content-header">
+            <h1>
+                Паспортные данные
+
+            </h1>
+
+        </section>
+        <section class="content">
+
+
+            <div class="row">
+                <div class="col-xs-12">
+
+                    <form id="form" class="form-horizontal" action="passport" method="post" >
+
+
+
+                        <div class="form-group">
+                            <div class="col-md-3 col-xs-12 control-label">
+                                <label for="passportSeries" title="Необходимое поле ">
+                                    Серия
+                                    <span class="text-danger">*</span>
+                                </label>
+                            </div>
+                            <div class="col-md-8 col-xs-12">
+                                <input class="form-control" id="passportSeries" name="series" type="text"
+                                       th:attr="value = ${passport?.series}">
+
+
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-3 col-xs-12 control-label">
+                                <label for="passportNumber" title="Необходимое поле ">
+                                    Номер
+                                    <span class="text-danger">*</span>
+                                </label>
+                            </div>
+                            <div class="col-md-8 col-xs-12">
+                                <input class="form-control" id="passportNumber" name="passportNumber" type="text"
+                                       th:attr="value = ${passport?.passportNumber}">
+                                
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-3 col-xs-12 control-label">
+                                <label for="passportAuthor" title="Необходимое поле ">
+                                    Кем выдан
+                                    <span class="text-danger">*</span>
+                                </label>
+                            </div>
+                            <div class="col-md-8 col-xs-12">
+                                <input class="form-control" id="passportAuthor" name="passportAuthor" type="text"
+                                       th:attr="value = ${passport?.passportAuthor}">
+                                
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-3 col-xs-12 control-label">
+                                <label for="passportDate" title="Необходимое поле ">
+                                    Дата выдачи
+                                    <span class="text-danger">*</span>
+                                </label>
+                            </div>
+                            <div class="col-md-8 col-xs-12">
+                                <input class="form-control" id="passportDate" name="passportDate" type="text"
+                                       th:attr="value = ${passport?.passportDate}">
+
+                            </div>
+                        </div>
+                        <div id="_code" class="form-group">
+                            <div class="col-md-3 col-xs-12 control-label">
+                                <label for="passportCode">Код подразделения</label>
+                            </div>
+                            <div class="col-md-8 col-xs-12">
+                                <input class="form-control" id="passportCode" name="passportCode" type="text"
+                                       th:attr="value = ${passport?.passportCode}">
+                            </div>
+                        </div>
+                        <div id="snils1" class="form-group" style="">
+                            <div class="col-md-3 col-xs-12 control-label">
+
+                                <label for="SNILS" title="Страховой номер индивидуального лицевого счёта">СНИЛС</label>
+
+                            </div>
+                            <div class="col-md-8 col-xs-12">
+                                <input class="form-control" id="SNILS" name="snils"  title="Страховой номер индивидуального лицевого счёта"
+                                       type="text" th:attr="value = ${passport?.snils}">
+                                <span id="SNILS_Message" class="field-validation-valid text-danger" style="display:none">
+
+                    </span>
+                            </div>
+                        </div>
+                        <div id="_valid" class="form-group" style="display: none;">
+                            <div class="col-md-3 col-xs-12 control-label">
+                                <label for="passportValid">Действителен до</label>
+                            </div>
+                            <div class="col-md-8 col-xs-12">
+                                <input class="form-control" id="passportValid" name="passportValid" type="text" value="">
+                                <span id="passportExpireMessage" class="field-validation-valid text-danger"
+                                      style="display:none;"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-offset-3 col-md-8 col-xs-12"><span class="Red">*</span> - Необходимое поле
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <div class="col-md-offset-3 col-md-8 col-xs-12">
+                                <h4>
+                                    Прочие паспорта
+                                    <i id="anotherpassportTooltip" class="fa fa-question-circle" data-toggle="popover"
+                                       data-placement="bottom" data-html="true"
+                                       data-content="<b>Для поступающих на программы бакалавриата/специалитета:</b><br /> если Вы сдавали ЕГЭ и регистрировались на сдачу по иному документу (не по тому, который указан выше), укажите данные этого документа и не забудьте загрузить его скан в разделе «Загрузка документов». Если Вы сдавали ЕГЭ по старому паспорту, загрузите скан последней страницы действующего паспорта, где указаны данные старого."
+                                       data-original-title="" title=""></i>
+                                </h4>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-offset-3 col-md-8 col-xs-12">
+                                <table id="tblOtherpassports" class="table table-bordered table-striped"
+                                       style="width: 100%; display: none;">
+                                    <thead>
+                                    <tr>
+                                        <th>Тип</th>
+                                        <th>Серия</th>
+                                        <th>Номер</th>
+                                        <th style="width:50%">Фамилия</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody id="tblpassportData"></tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div id="addAnotherpassportForm" class="modal fade" tabindex="-1" role="dialog">
+                            <div class="modal-dialog modal-lg" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-body">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">×</span></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="form-horizontal">
+                                                <div class="form-group">
+                                                    <div class="control-label col-md-3 col-xs-12"><label>Тип</label></div>
+                                                    <div class="col-md-8 col-xs-12">
+                                                        <select class="form-control select2-hidden-accessible"
+                                                                id="_frmpassportType" name="_frmpassportType" tabindex="-1"
+                                                                aria-hidden="true">
+                                                            <option selected="selected" value="1">Паспорт РФ</option>
+                                                            <option value="2">Загран. паспорт РФ</option>
+                                                            <option value="4">Свидет. о рожд.</option>
+                                                            <option value="5">Удостоверение</option>
+                                                            <option value="6">Прочее</option>
+                                                        </select><span
+                                                            class="select2 select2-container select2-container--default"
+                                                            dir="ltr" style="width: 100%;"><span class="selection"><span
+                                                            class="select2-selection select2-selection--single"
+                                                            role="combobox" aria-haspopup="true" aria-expanded="false"
+                                                            tabindex="0"
+                                                            aria-labelledby="select2-_frmpassportType-container"><span
+                                                            class="select2-selection__rendered"
+                                                            id="select2-_frmpassportType-container" title="Паспорт РФ">Паспорт РФ</span><span
+                                                            class="select2-selection__arrow" role="presentation"><b
+                                                            role="presentation"></b></span></span></span><span
+                                                            class="dropdown-wrapper" aria-hidden="true"></span></span>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="control-label col-md-3 col-xs-12"><label>Серия</label></div>
+                                                    <div class="col-md-8 col-xs-12"><input id="_frmpassportSeries"
+                                                                                           type="text" class="form-control">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="control-label col-md-3 col-xs-12"><label>Номер</label></div>
+                                                    <div class="col-md-8 col-xs-12"><input id="_frmpassportNumber"
+                                                                                           type="text" class="form-control">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="control-label col-md-3 col-xs-12"><label>Фамилия (если
+                                                        отличалась)</label></div>
+                                                    <div class="col-md-8 col-xs-12"><input id="_frmSurname" type="text"
+                                                                                           class="form-control"></div>
+                                                </div>
+                                                <div id="ErrorsBlock" class="form-group" style="display:none;">
+                                                    <div class="col-xs-12" style="margin-top:10px;">
+                                                        <div class="alert alert-danger">
+                                                            <span id="ErrorMessage"></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <div class="form-group" id="btnAddOlympiad">
+                                                    <div class="col-md-offset-8 col-md-3 col-xs-offset-6 col-xs-6">
+                                                        <div class="row">
+                                                            <button type="button" onclick="SaveOtherpassport()"
+                                                                    class="btn btn-block btn-default">Сохранить
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-offset-3 col-md-2 col-xs-5">
+                                <button type="button" data-toggle="modal" data-target="#addAnotherpassportForm"
+                                        class="btn btn-block btn-info"> Добавить
+                                </button>
+                            </div>
+                            <div class="col-md-offset-3 col-md-3 col-xs-offset-1 col-xs-6">
+                                <button id="btnSubmit" class="btn btn-block btn-success" type="submit">
+                                    Далее
+                                    <span class="glyphicon glyphicon-menu-right"></span>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </section>
+    </div>
+</div>
+
+
+
+
+<div th:replace="fragments/footer :: footer"/>
+</body>
+</html>

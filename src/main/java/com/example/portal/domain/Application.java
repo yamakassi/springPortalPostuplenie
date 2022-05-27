@@ -1,11 +1,11 @@
 package com.example.portal.domain;
 
+import com.example.portal.domain.users.User;
 import lombok.Data;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Entity

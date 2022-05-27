@@ -11,4 +11,7 @@ public interface ApplicationRepo extends JpaRepository<Application,Long> {
     Optional<Direction> findBySnils(String abbr);
     void deleteBySnils(String abbr);
 
+
+
+    List<Application> findByRegisteredIsFalse();
 }

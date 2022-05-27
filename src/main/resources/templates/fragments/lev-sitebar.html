@@ -1,0 +1,58 @@
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<body>
+
+<aside th:fragment="lev-sitebar" class="main-sidebar bg-dark">
+    <!-- sidebar: style can be found in sidebar.less -->
+    <section class="sidebar" style="height: auto;">
+        <!-- sidebar menu: : style can be found in sidebar.less -->
+        <ul class="sidebar-menu tree" data-widget="tree">
+            <li>
+                <a href="/lk"><i class="fa fa-home fa-fw"></i> <span>Главная</span></a>
+            </li>
+
+            <li id="_personalOfficeMenu" class=" dropend">
+                <a class="dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="fa fa-edit fa-fw"></i>
+                    <span>Анкета</span>
+
+
+                </a>
+                <ul class=" dropdown-menu one active">
+                    <li id="_personalOfficeMenu_PersonalInfo"><a class="dropdown-item" href="/lk/PersonalInfo"><span>Личные данные</span></a>
+                    </li>
+                    <li id="_personalOfficeMenu_Passport"><a class="dropdown-item" href="/lk/Passport"><span>Паспортные данные</span></a>
+                    </li>
+                    <li id="_personalOfficeMenu_Contacts"><a class="dropdown-item"
+                                                             href="/lk/Contacts"><span>Контакты</span></a></li>
+                    <li id="_personalOfficeMenu_Education"><a class="dropdown-item" href="/lk/CurrentEducation"><span>Образование</span></a>
+                    </li>
+
+                    <li id="_personalOfficeMenu_AddInfo"><a class="dropdown-item" href="/lk/AddInfo"><span>Дополнительные сведения</span></a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="/lk/NewApplication"><i class="fa fa-check fa-fw"></i> <span>Заявление</span></a>
+            </li>
+            <li>
+
+                <a href="/Files"><i class="fa fa-file-pdf "></i><span>Загрузка документов</span></a>
+            </li>
+
+
+            <li>
+                <a href="/lk/UserSettings"><i class="fa fa-wrench fa-fw"></i><span>Настройки</span></a>
+            </li>
+        </ul>
+    </section>
+    <!-- /.sidebar -->
+</aside>
+</body>
+</html>
+
+
+
+
+

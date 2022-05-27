@@ -2,15 +2,12 @@ package com.example.portal.services;
 
 import com.example.portal.domain.Application;
 import com.example.portal.domain.Exam;
-import com.example.portal.domain.User;
+import com.example.portal.domain.users.*;
 import com.example.portal.domain.enums.Role;
 import com.example.portal.repositories.ExamRepo;
 import com.example.portal.repositories.UserRepo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -61,6 +58,40 @@ public class UserService  {
     public  void addApplication(User user, Application application){
         user.setApplication(application);
         userRepo.save(user);
+    }
+
+    public void editPersonalInfo(Principal principal, PersonalInfo persInfo) {
+
+        User user = getUserByPrincipal(principal);
+        user.setPersonalInfo(persInfo);
+        userRepo.save(user);
+    }
+
+    public void editPassport(Principal principal, Passport pass) {
+        User user = getUserByPrincipal(principal);
+        user.setPassport(pass);
+        userRepo.save(user);
+    }
+
+    public void editContacts(Principal principal, Contacts contacts) {
+        User user = getUserByPrincipal(principal);
+        user.setContacts(contacts);
+        userRepo.save(user);
+    }
+
+    public void editEducation(Principal principal, CurrentEducation education) {
+        User user = getUserByPrincipal(principal);
+        user.setCurrentEducation(education);
+        userRepo.save(user);
+
+
+    }
+
+    public void editAdditInfo(Principal principal, AddInfo additInfo) {
+        User user = getUserByPrincipal(principal);
+        user.setAdditInfo(additInfo);
+        userRepo.save(user);
+
     }
 
 

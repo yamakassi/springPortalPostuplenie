@@ -8,13 +8,14 @@
 
 <div th:replace="fragments/header :: header"/>
 
-<div class="container mx-auto w-75 align-items-center ">
+<div class="container">
+  <div th:each="app:${applications}">
 
-    <h1>Направление <span th:text="${direction.title}"></span></h1>
+          <span th:text="${app.snils}"></span>
+          <span th:text="${app.registered}"></span>
 
-    <hr
 
-
+  </div>
 </div>
 
 <div th:replace="fragments/footer :: footer"/>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Spring Security Example </title>
+    <div th:replace="fragments/header :: header-css"/>
+</head>
+<body>
+
+<div th:replace="fragments/header :: header"/>
+
+<div class="wrapper" style="overflow: hidden; height: auto; min-height: 100%;">
+    <!-- Left side column. contains the sidebar -->
+    <aside th:replace="fragments/lev-sitebar :: lev-sitebar"/>
+    <div class="content-wrapper" style="min-height: 368px;">
+        <section class="content-header">
+            <h1>
+                Загрузка документов
+
+            </h1>
+
+        </section>
+        <section class="content">
+
+
+
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="box info-box">
+                                <div class="box-tools pull-right">
+                                    <button type="button" class="btn btn-box-tool" data-widget="remove">
+                                        <i class="fa fa-times"></i>
+                                    </button>
+                                </div>
+                                <div class="info-box-icon bg-aqua">
+                                    <i class="fa fa-warning"></i>
+                                </div>
+                                <div class="info-box-content">
+                                    <div class="info-box-text"><h5>ВНИМАНИЕ</h5></div>
+                                    <div>
+                                        <b>Каждый документ следует загружать одним цельным файлом в формате PDF</b>. <br>Для загрузки фотографии можно использовать файлы JPG (JPEG, PNG).
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="box box-widget">
+                        <div class="box-body">
+                        </div>
+                    </div>
+
+
+                    <ul class="nav nav-tabs">
+                        <li class="active">
+                            <a>
+                                Общие файлы
+                            </a>
+                        </li>
+                    </ul>
+
+                    <div class="box box-widget">
+                        <div class="box-header with-border">
+                            <i class="glyphicon glyphicon-list"></i> <strong style="font-size:16pt">Общие файлы</strong>
+                        </div>
+                        <div class="box-body">
+                            <form action="/Files/AddPersonFile" method="post" enctype="multipart/form-data" class="form-horizontal" onsubmit="ValidateInput('1')">
+                                <div class="form-group">
+                                    <div class="col-md-3 col-xs-12 control-label">
+                                        <label for="FileTypeId">Тип файла</label>
+                                    </div>
+                                    <div class="col-md-8 col-xs-12">
+                                        <select class="form-control" id="fileType" name="FileTypeId" onchange="OnSelectedChanged()"></select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-3 col-xs-12 control-label">
+                                        <label>Файл</label>
+                                    </div>
+                                    <div class="col-md-6 col-xs-9">
+                                        <input id="fileAttachment" type="file" name="File" onchange="ValidateInput()">
+                                    </div>
+                                    <div class="col-md-offset-0 col-md-2 col-xs-3" style="padding-left:5px;">
+                                        <button class="btn btn-success pull-right" type="submit">Загрузить</button>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-3 col-xs-12 control-label">
+                                        <label>Комментарий</label>
+                                    </div>
+                                    <div class="col-md-8 col-xs-12">
+                                        <textarea name="Comment" class="form-control"></textarea>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="box-footer">
+                            <h4>Нет файлов</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </section>
+    </div>
+
+</div>
+
+<div th:replace="fragments/footer :: footer"/>
+
+</body>
+</html>

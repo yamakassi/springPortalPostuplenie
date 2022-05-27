@@ -1,6 +1,6 @@
 package com.example.portal.services;
 
-import com.example.portal.domain.User;
+import com.example.portal.domain.users.User;
 import com.example.portal.repositories.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetailsService;

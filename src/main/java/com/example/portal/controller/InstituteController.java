@@ -29,6 +29,7 @@ public class InstituteController {
         model.addAttribute("user", instituteService.getUserByPrincipal(principal));
         return "portal";
     }
+
     @GetMapping("/institute/{abbr}")
     public String instituteInfo(@PathVariable String abbr,Model model){
 

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <title>Spring Security Example </title>
     <div th:replace="fragments/header :: header-css"/>
@@ -8,7 +9,7 @@
 
 <div th:replace="fragments/header :: header"/>
 
-<div class="container">
+<div class="container mx-auto w-75 align-items-center ">
 
     <h1 style="text-align: center">Личный кабинет</h1>
     <hr>
@@ -25,14 +26,162 @@
         Номер телефона: <b th:text="${user.phoneNumber}"></b>
         <br>
         <br>
-        <div sec:authorize="isAuthenticated()">
-        <a class="btn btn-dark mb-3" style="text-align: center; width: 100%"
-           href="/admin">
-            Панель администратора
-        </a><br>
-    </div>
+        <div sec:authorize access="hasRole('ADMIN')">
+            <a class="btn btn-dark mb-3" style="text-align: center; width: 100%"
+               href="/admin">
+                Панель администратора
+            </a><br>
+        </div>
 
-</div>
+        <div>
+            <form th:action="@{/spravka}" method="post"  class="align-items-center b" enctype="multipart/form-data">
+                номер мед полюса : <input type="text" name="id" class="form-control">
+
+
+                <input type="submit" class="btn btn mt-1" value="добавить">
+            </form>
+        </div>
+
+
+        <b>Добавить экзамены</b>
+        <form th:action="@{/user/{id}/app/create(id=${user.getId()})}"
+              th:object="${exams}" method="post">
+            <div class="row">
+                <div class="col-auto">
+                    <div><label label class="form-check-label" for="flexCheckDefault">
+                        <input type="checkbox" value="math" name="nameExamDTO" th:field="*{nameExamDTO}"
+                               id="flexCheckDefault" class="form-check-input">
+
+                        математика </label>
+
+                        <input name="valueExamDTO" th:field="*{valueExamDTO}"
+                               pattern="[0-9]*"
+                               aria-label="Балл"
+                        >
+
+
+                    </div>
+                </div>
+                <div class="col-auto">
+                    <div><label label class="form-check-label" for="flexCheckDefault1">
+                        <input type="checkbox" value="rus" name="nameExamDTO" th:field="*{nameExamDTO}"
+                               id="flexCheckDefault1" class="form-check-input"
+                        >
+                        русский
+                    </label>
+
+                        <input name="valueExamDTO" th:field="*{valueExamDTO}"
+                               pattern="[0-9]*"
+                               aria-label="Балл"
+                        >
+
+
+                    </div>
+                </div>
+                <div class="col-auto">
+                    <div><label label class="form-check-label" for="flexCheckDefault2">
+                        <input type="checkbox" value="info" name="nameExamDTO" th:field="*{nameExamDTO}"
+                               id="flexCheckDefault2" class="form-check-input"
+                        >
+                        информатика
+                    </label>
+
+                        <input name="valueExamDTO" th:field="*{valueExamDTO}"
+                               pattern="[0-9]*"
+                               aria-label="Балл"
+                        >
+
+
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-auto">
+                        <div><label label class="form-check-label" for="flexCheckDefault3">
+                            <input type="checkbox" value="phys" name="nameExamDTO" th:field="*{nameExamDTO}"
+                                   id="flexCheckDefault3" class="form-check-input"
+                            >
+                            <div>физика</div>
+                        </label>
+                            <div>
+                                <input name="valueExamDTO" th:field="*{valueExamDTO}"
+                                       pattern="[0-9]*"
+                                       aria-label="Балл"
+                                >
+
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-auto">
+                        <div><label label class="form-check-label" for="flexCheckDefault4">
+                            <input type="checkbox" value="biol" name="nameExamDTO" th:field="*{nameExamDTO}"
+                                   id="flexCheckDefault4" class="form-check-input"
+                            >
+                            <div>биология</div>
+                        </label>
+                            <div>
+                                <input name="valueExamDTO" th:field="*{valueExamDTO}"
+                                       pattern="[0-9]*"
+                                       aria-label="Балл"
+                                >
+
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-auto">
+                        <div><label label class="form-check-label" for="flexCheckDefault5">
+                            <input type="checkbox" value="chem" name="nameExamDTO" th:field="*{nameExamDTO}"
+                                   id="flexCheckDefault5" class="form-check-input"
+                            >
+                            <div>химия</div>
+                        </label>
+                            <div>
+                                <input name="valueExamDTO" th:field="*{valueExamDTO}"
+                                       pattern="[0-9]*"
+                                       aria-label="Балл"
+                                >
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--
+                <div >
+                    <div ><label
+                            ><input type="checkbox" value="egeAddExam" id="ck2"
+                                                                              name="egeAddExam"
+                                                                              >
+                        <div >Сдам дополнительный экзамен</div>
+                    </label>
+                        <div >
+                            <div >
+                                <div >На некоторые специальности помимо ЕГЭ
+                                    необходимо сдать дополнительные профессиональные или творческие экзамены в вузе.
+                                </div>
+                            </div>
+                            <svg >
+                                <use xlink:href="#icon__help"></use>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>-->
+                <div spacing="xlarge"></div>
+                <div>
+                    <div>
+                        <button color="blue" shape="rectangle" type="submit"
+                        ><span
+                        >Зарегистрироваться и подобрать вузы</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+
+    </div>
 </div>
 
 <div th:replace="fragments/footer :: footer"/>

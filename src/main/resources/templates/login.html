@@ -10,18 +10,50 @@
 
 <div class="container">
 
-    <div class="row" style="margin-top:20px">
-        <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
-            <h4>Авторизация</h4>
-            <form th:action="@{/login}" method="post">
-                Эл. почта: <input type="email" name="username"><br><br>
-                Пароль: <input type="password" name="password"><br><br>
 
-                <input type="submit" value="Вход"/>
+    <div class="mx-auto w-25">
+        <div >
+            <form th:action="@{/login}" method="post" class="align-items-center b">
+
+                <!-- Email input -->
+                <div class="form-outline mt-3 mb-1 ">
+                    <label class="form-label" for="loginName">Email</label>
+                    <input type="email" id="loginName" name="username" class="form-control" />
+
+                </div>
+
+                <!-- Password input -->
+                <div class="form-outline mb-2">
+                    <label class="form-label"  for="loginPassword">Password</label>
+
+                    <input type="password" id="loginPassword"  name="password" class="form-control" />
+                </div>
+
+                <!-- 2 column grid layout -->
+                <!-- <div class="row mb-4">
+                     <div class="col-md-6 d-flex justify-content-center">
+                         //Checkbox
+                         <div class="form-check mb-3 mb-md-0">
+                             <input class="form-check-input" type="checkbox" value="" id="loginCheck" checked />
+                             <label class="form-check-label" for="loginCheck"> Remember me </label>
+                         </div>
+                     </div>
+
+                     <div class="col-md-6 d-flex justify-content-center">
+                          ////Simple link
+                         <a href="#!">Forgot password?</a>
+                     </div>
+                 </div> -->
+
+                <!-- Submit button -->
+                <button type="submit" class="btn btn-primary btn-block mb-4">Вход</button>
+
+                <div class="text-center">
+                    <p>Not a member? <a href="/registration">Register</a></p>
+                </div>
             </form>
-            <a href="/registration">Зарегистрироваться</a>
-
         </div>
+
     </div>
 
 </div>

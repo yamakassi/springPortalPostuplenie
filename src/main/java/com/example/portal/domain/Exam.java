@@ -1,5 +1,6 @@
 package com.example.portal.domain;
 
+import com.example.portal.domain.users.User;
 import lombok.*;
 import org.hibernate.Hibernate;
 
@@ -19,7 +20,7 @@ public class Exam {
 
     @ManyToOne(cascade = CascadeType.REFRESH)
     @JoinColumn
-    private  User user;
+    private User user;
 
     public Exam(String nameExam, Integer valueExam,User user) {
         this.nameExam=nameExam;

@@ -1,7 +1,6 @@
 package com.example.portal.controller;
 
-import com.example.portal.domain.User;
-import com.example.portal.domain.enums.Role;
+import com.example.portal.services.ApplicationService;
 import com.example.portal.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -9,16 +8,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.security.Principal;
-import java.util.Map;
-
 @Controller
 @RequestMapping("/admin")
 @PreAuthorize("hasRole('ADMIN')")
 public class AdminController {
     @Autowired
     private  UserService userService;
-
+    @Autowired
+    private ApplicationService applicationService;
 
 
     @GetMapping()
@@ -31,6 +28,11 @@ public class AdminController {
 
         userService.disableUser(id);
         return "redirect:/admin";
+    }
+    @GetMapping("/confirmApplication")
+    public String confirmApplication(Model model){
+        model.addAttribute("applications",applicationService.findAllByNoConfirmApplications() );
+        return "confirm-applications";
     }
 
 /* --- add super admin func modification user.roles

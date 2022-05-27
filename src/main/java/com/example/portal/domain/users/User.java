@@ -1,5 +1,8 @@
-package com.example.portal.domain;
+package com.example.portal.domain.users;
 
+import com.example.portal.domain.Application;
+import com.example.portal.domain.Exam;
+import com.example.portal.domain.Image;
 import com.example.portal.domain.enums.Role;
 import lombok.*;
 import org.hibernate.Hibernate;
@@ -22,27 +25,42 @@ public class User implements UserDetails {
     private Long id;
     @Column(name = "email", unique = true)
     private String email;
+
     @Column(name = "phone_number", unique = true)
     private String phoneNumber;
     private boolean active;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY,
-            mappedBy = "user")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "user")
     private List<Exam> exams = new ArrayList<>();
+
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "image_id")
     private Image avatar;
+
+
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "application_id", referencedColumnName = "id")
-    private Application application;
+    @JoinColumn(name = "personal_info_id")
+    private PersonalInfo personalInfo;
     @Column(columnDefinition = "text")
     private String password;
+
     @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
-    @CollectionTable(name = "user_role",
-            joinColumns = @JoinColumn(name = "user_id"))
+    @CollectionTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"))
     @Enumerated(EnumType.STRING)
     private Set<Role> roles = new HashSet<>();
     private LocalDateTime dateOfCreated;
+    //info user
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "application_id", referencedColumnName = "id")
+    private Application application;
+    @OneToOne(cascade = CascadeType.ALL)
+    private Passport passport;
+    @OneToOne(cascade = CascadeType.ALL)
+    private CurrentEducation currentEducation;
+    @OneToOne(cascade = CascadeType.ALL)
+    private Contacts contacts;
+    @OneToOne(cascade = CascadeType.ALL)
+    private AddInfo additInfo;
 
     @PrePersist
     private void init() {

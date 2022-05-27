@@ -8,7 +8,7 @@
 
 <div th:replace="fragments/header :: header"/>
 
-<div class="container">
+<div class="container mx-auto w-75 align-items-center ">
 
     <h5>Направления</h5>
 
@@ -21,18 +21,20 @@
 
 
 <!-- перенос в superAdmin panel -->
+    <div class="mx-auto w-25">
 <h3>Добавить институт</h3>
-<form th:action="@{/institute/create}" method="post" enctype="multipart/form-data">
-    Название института : <input type="text" name="title">
-    Сокращение института : <input type="text" name="abbr">
-    Описание : <input type="text" name="description">
-    Директор института : <input type="text" name="director">
-    Контакты звание института : <input type="text" name="contacts">
+
+<form th:action="@{/institute/create}" method="post"  class="align-items-center b" enctype="multipart/form-data">
+    Название института : <input type="text" name="title" class="form-control">
+    Сокращение института : <input type="text" name="abbr" class="form-control">
+    Описание : <input type="text" name="description" class="form-control">
+    Директор института : <input type="text" name="director" class="form-control">
+    Контакты звание института : <input type="text" name="contacts" class="form-control">
     Фото: <input type="file" name="file">
 
-    <input type="submit" value="добавить">
+    <input type="submit" class="btn btn mt-1" value="добавить">
 </form>
-
+    </div>
 
 
 <div th:replace="fragments/footer :: footer"/>

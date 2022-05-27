@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Spring Security Example </title>
+    <div th:replace="fragments/header :: header-css"/>
+</head>
+<body>
+
+<div th:replace="fragments/header :: header"/>
+
+<div class="wrapper" style="overflow: hidden; height: auto; min-height: 100%;">
+    <!-- Left side column. contains the sidebar -->
+    <aside th:replace="fragments/lev-sitebar :: lev-sitebar"/>
+    <div class="content-wrapper" style="min-height: 368px;">
+        <section class="content-header">
+            <h1>
+                Образование
+
+                <i id="educationTooltip" style="font-size:18px;" class="fa fa-question-circle" data-toggle="popover"
+                   data-placement="bottom" data-html="true"
+                   data-content="<p>Укажите данные о последнем законченном или текущем образовании,
+                   которые необходимы для подачи заявления" data-original-title="" title=""></i>
+
+            </h1>
+
+        </section>
+        <section class="content">
+
+
+            <div class="row">
+                <div id="contentLayer" class="col-xs-12">
+                     <form id="form" class="form-horizontal" action="CurrentEducation" method="post"
+                          >
+
+                        <input data-val="true" data-val-required="Требуется поле Enabled." id="Enabled" name="Enabled"
+                               type="hidden" value="True">
+
+                        <div class="form-horizontal">
+                            <div class="form-group">
+                                <div class="col-md-3 col-xs-12 control-label">
+                                    <label for="typeSchool" title="Необходимое поле ">
+                                        Тип образовательного учреждения
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                </div>
+                                <div class="col-md-8 col-xs-12">
+                                    <select class="form-control select2-hidden-accessible"
+                                            id="typeSchool"
+                                            name="typeSchool"
+                                             tabindex="-1" aria-hidden="true"
+                                            >
+                                       <option  value="school">Школа</option>
+                                         <option value="university">ВУЗ</option>
+                                        <option value="college">СПО</option>
+
+                                    </select>
+                                </div>
+                            </div>
+                            <div  class="form-group" style="">
+                                <div class="col-md-3 col-xs-12 control-label">
+                                    <label for="schoolExitClassId" title="Необходимое поле ">
+                                        Оконченный класс
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                </div>
+                                <div class="col-md-8 col-xs-12">
+                                    <select class="form-control select2-hidden-accessible"
+                                            id="schoolExitClassId"
+                                            name="schoolExitClass"
+                                            tabindex="-1" aria-hidden="true"
+
+                                    >
+                                        <option value="12">12 класс</option>
+                                        <option  value="11">11 класс</option>
+                                        <option value="10">10 класс</option>
+                                        <option value="9">9 класс</option>
+                                        <option value="8">8 класс</option>
+                                        <option value="7">7 класс</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div id="_schoolName" class="form-group">
+                                <div class="col-md-3 col-xs-12 control-label">
+                                    <label for="schoolName" title="Необходимое поле ">
+                                        Название образовательного учреждения
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                </div>
+                                <div class="col-md-8 col-xs-12">
+                                    <input class="form-control ui-autocomplete-input"
+                                           id="schoolName"
+                                           name="schoolName"
+                                           type="text"
+                                           th:attr="value = ${currentEducation?.schoolName}" autocomplete="off">
+                                    <span id=schoolName_Message"
+                                          class="field-validation-valid text-danger" style="display:none">
+                            Укажите название образовательного учреждения
+                        </span>
+                                </div>
+                            </div>
+                            <div id="countryEduc" class="form-group">
+                                <div class="col-md-3 col-xs-12 control-label">
+                                    <label for="countryEducId" title="Необходимое поле ">
+                                        Страна обучения
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                </div>
+                                <div class="col-md-8 col-xs-12">
+                                    <select class="form-control select2-hidden-accessible"
+                                            id="countryEducId"
+                                            name="countryEducId"
+                                             tabindex="-1" aria-hidden="true">
+                                        <option selected="selected" value="193">Россия</option>
+                                        <option value="236">Украина</option>
+                                        <option value="23">Беларусь</option>
+                                        <option value="125">Казахстан</option>
+                                        <option value="131">Кыргызстан</option>
+                                        <option value="233">Туркменистан</option>
+                                        <option value="89">Грузия</option>
+                                        <option value="156">Молдавия</option>
+                                        <option value="12">Армения</option>
+
+                                        <option value="252">Лицо без гражданства</option>
+                                    </select></div>
+                            </div>
+                            <div id="regionEduc" class="form-group">
+                                <div class="col-md-3 col-xs-12 control-label">
+                                    <label for="regionEducId" title="Необходимое поле ">
+                                        Регион
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                </div>
+                                <div class="col-md-8 col-xs-12">
+                                    <select class="form-control select2-hidden-accessible"
+                                            id="regionEducId"
+                                            name="regionEducId"
+                                            tabindex="-1" aria-hidden="true">
+                                        <option selected="selected" value="193">Россия</option>
+                                        <option value="236">Украина</option>
+                                        <option value="23">Беларусь</option>
+                                        <option value="125">Казахстан</option>
+                                        <option value="131">Кыргызстан</option>
+                                        <option value="233">Туркменистан</option>
+                                        <option value="89">Грузия</option>
+                                        <option value="156">Молдавия</option>
+                                        <option value="12">Армения</option>
+
+                                        <option value="252">Лицо без гражданства</option>
+                                    </select> </div>
+                            </div>
+                            <div id="_SchoolCity" class="form-group">
+                                <div class="col-md-3 col-xs-12 control-label">
+                                    <label for="schoolCity">Населенный пункт</label>
+                                </div>
+                                <div class="col-md-8 col-xs-12">
+                                    <input class="form-control ui-autocomplete-input"
+                                           id="schoolCity"
+                                           name="schoolCity"
+                                           type="text" th:attr="value = ${currentEducation?.schoolCity}" >
+
+                                </div>
+                            </div>
+
+                            <div id="educDocumentInfo">
+                                <div id="_schoolExitYear" class="form-group">
+                                    <div class="col-md-3 col-xs-12 control-label">
+                                        <label id="schoolExitYearLabel" title="Необходимое поле ">
+                                            Год окончания обучения
+                                            <span class="text-danger">*</span>
+                                        </label>
+                                    </div>
+                                    <div class="col-md-8 col-xs-12">
+                                        <input class="form-control" id="schoolExitYear"
+                                               name="schoolExitYear"
+                                               type="text" th:attr="value = ${currentEducation?.schoolExitYear}">
+
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-offset-3 col-md-8 col-xs-12">
+                                        <i>Оставьте серию и номер пустыми, если Вы ещё не получили документ об
+                                            образовании</i>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-3 col-xs-12 control-label">
+                                        <label id="labelSeries" for="series">Серия аттестата</label>
+                                    </div>
+                                    <div class="col-md-8 col-xs-12">
+                                        <input class="form-control" id="series" maxlength="20"
+                                               name="series"
+                                              type="text" th:attr="value = ${currentEducation?.series}">
+
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-3 col-xs-12 control-label">
+                                        <label id="labelNumber" for="number">Номер аттестата</label>
+                                    </div>
+                                    <div class="col-md-8 col-xs-12">
+                                        <input class="form-control" id="number" maxlength="30"
+                                               name="number"
+                                               type="text" th:attr="value = ${currentEducation?.number}">
+
+                                        <i id="numberFormat_Message" style="">
+                                            Для аттестатов, выданных после 2014 года вводите все цифры в поле номер
+                                        </i>
+                                    </div>
+                                </div>
+                                <div id="_avgMark" class="form-group">
+                                    <div class="col-md-3 col-xs-12 control-label">
+                                        <label for="avgMark">Средний балл</label>
+                                    </div>
+                                    <div class="col-md-8 col-xs-12">
+                                        <input class="form-control" id="avgMark"
+                                               name="avgMark" type="text" th:attr="value = ${currentEducation?.avgMark}">
+                                    </div>
+                                </div>
+                                <div id="_isExcellent" class="form-group">
+                                    <div class="col-md-offset-3 col-md-8 col-xs-12">
+                                        <label class="checkbox" style="margin-left:20px;">
+                                            <input data-val="true" data-val-required="Требуется поле IsExcellent."
+                                                   id="isExcellent"
+                                                   name="isExcellent" type="checkbox"
+                                                   value="true"><input name="isExcellent"
+                                                                       type="hidden" value="false">
+                                            Медалист (красный диплом)
+                                        </label>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-offset-3 col-md-8 col-xs-12"><span class="Red">*</span> - Необходимое
+                                поле
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-offset-9 col-md-2 col-xs-offset-6 col-xs-6">
+                                <button id="btnSubmit" class="btn btn-block btn-success" type="submit">
+                                    Далее
+                                    <span class="glyphicon glyphicon-menu-right"></span>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+
+        </section>
+    </div>
+
+</div>
+
+<div th:replace="fragments/footer :: footer"/>
+
+</body>
+</html>

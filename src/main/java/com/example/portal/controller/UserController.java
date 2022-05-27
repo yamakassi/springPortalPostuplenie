@@ -2,9 +2,9 @@ package com.example.portal.controller;
 
 import com.example.portal.ExamsDTO;
 import com.example.portal.domain.Exam;
-import com.example.portal.domain.User;
+import com.example.portal.domain.users.PersonalInfo;
+import com.example.portal.domain.users.User;
 import com.example.portal.services.UserService;
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -32,6 +32,7 @@ public class UserController {
                           Model model) {
         User user = userService.getUserByPrincipal(principal);
         model.addAttribute("user", user);
+        model.addAttribute("exams", new ExamsDTO());
         return "profile";
     }
     @GetMapping("/registration")
@@ -41,19 +42,22 @@ public class UserController {
 
 
     @PostMapping("/registration")
-    public String createUser(User user, Model model) {
+    public String createUser(User user, PersonalInfo persInfo, Model model) {
+
+    user.setPersonalInfo(persInfo);
         if(!userService.createUser(user)){
            // model.addAttribute("errorMessage", "Пользователь с email:" + user.getEmail() + ", уже существует");
             return "registration";
         }
         return "redirect:/login";
     }
+    // -- для просмотра админом
     @GetMapping("/user/{user}")
     public String userInfo(@PathVariable("user") User user, Model model) {
 
         model.addAttribute("user", user);
     model.addAttribute("exams", new ExamsDTO());
-       // model.addAttribute("user-", user);
+
 
         return "user-info";
 
@@ -68,7 +72,7 @@ public class UserController {
 
 
         //directionService.saveDirection(direction,instAbbr);
-        return  "user-info";
+        return  "profile";
     }
 
 }

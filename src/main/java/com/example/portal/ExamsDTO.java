@@ -1,13 +1,13 @@
 package com.example.portal;
 
 import com.example.portal.domain.Exam;
-import com.example.portal.domain.User;
+import com.example.portal.domain.users.User;
 import lombok.Data;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Stream;
+
 @Component
 @Data
 public class ExamsDTO {

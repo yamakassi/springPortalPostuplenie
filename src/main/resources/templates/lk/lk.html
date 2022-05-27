@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <div th:replace="fragments/header :: header-css"/>
+</head>
+<body>
+
+<div th:replace="fragments/header :: header"/>
+
+<div class="wrapper" style="overflow: hidden; height: auto; min-height: 100%;">
+    <!-- Left side column. contains the sidebar -->
+    <aside th:replace="fragments/lev-sitebar :: lev-sitebar"/>
+
+
+    <div class="content-wrapper" style="min-height: 594px;">
+        <section class="content-header">
+            <h1>
+                Алгоритм поступления
+
+            </h1>
+
+        </section>
+        <section class="content">
+
+
+            <div class="row">
+                <div class="col-xs-12">
+                    <ul class="timeline">
+                        <!-- Person -->
+                        <li>
+                            <!-- timeline icon -->
+                            <i class="fa fa-warning bg-red"></i>
+                            <div class="timeline-item">
+                                <h3 class="timeline-header">Заполните анкету</h3>
+                                <div class="timeline-body">
+                                    Поля анкеты, отмеченные знаком *, являются обязательными для заполнения.<br>
+                                    Под знаком <i class="fa fa-question-circle"></i> скрыты подсказки, которые помогут
+                                    Вам правильно заполнить анкету
+                                </div>
+                                <div class="timeline-footer">
+                                    <a href="lk/PersonalInfo" class="btn btn-primary btn-xs">Заполнить</a>
+                                </div>
+                            </div>
+                        </li>
+
+                        <!-- Application -->
+                        <li>
+                            <!-- timeline icon -->
+                            <i class="fa fa-warning bg-red"></i>
+                            <div class="timeline-item">
+                                <h3 class="timeline-header">Подайте заявление</h3>
+                                <div class="timeline-body">
+                                    В заявлении укажите все образовательные программы, формы и основы обучения, в
+                                    конкурсе на которые Вы желаете принимать участие.<br>
+                                    После создания заявления скачайте его, распечатайте и поставьте все необходимые
+                                    подписи.<br>
+
+                                    <p style="color:darkred; padding-left:30px; padding-top:10px;">
+                                        Важно! если Вы нашли ошибку, то <b>до загрузки скана подписанного заявления,</b>
+                                        удалите заявление из личного кабинета, исправьте данные в анкете, затем создайте
+                                        новое заявление.<br>
+                                        Если Вы уже загрузили подписанное заявление и хотите его изменить, свяжитесь со
+                                        специалистами Комиссии по приему документов.
+                                    </p>
+                                </div>
+                                <div class="timeline-footer">
+                                    <div class="alert alert-danger">Заполните анкету для того, чтобы подать заявление
+                                    </div>
+                                </div>
+                                <div class="timeline-footer">
+                                    <a href="lk/NewApplication" class="btn btn-primary btn-xs">Подать заявление</a>
+                                </div>
+                            </div>
+                        </li>
+                        <!-- Upload Files -->
+                        <li>
+                            <!-- timeline icon -->
+                            <i class="fa fa-warning bg-yellow"></i>
+                            <div class="timeline-item">
+                                <h3 class="timeline-header">Загрузите документы</h3>
+                                <div class="timeline-body">
+                                    Загрузите все необходимые документы в разделе <a href="lk/Files">«Загрузка
+                                    документов»</a>.<br>
+                                    <strong>Не забудьте прикрепить скан подписанного заявления!</strong><br>
+                                    <p style="color:darkred; padding-left:30px; padding-top:10px;">
+                                        Важно! Документы принимаются только через Личный кабинет в электронно-цифровом
+                                        виде. Заявление о приеме на обучение и иные документы, направленные через
+                                        операторов почтовой связи общего пользования, по электронной почте или факсу,
+                                        Приемной комиссией <b>не принимаются и не рассматриваются.</b><br>
+                                        Важно! для поступающих на программы <b>бакалавриата/специалитета по результатам
+                                        ЕГЭ:</b> обязательно загрузите скан документа, по которому сдавали ЕГЭ (если
+                                        сдавали по старому паспорту, то загрузите скан последней страницы актуального
+                                        паспорта со сведениями о ранее выданных паспортах)<br>
+                                    </p>
+                                </div>
+                                <div class="timeline-footer">
+                                    <a href="lk/Files" class="btn btn-primary btn-xs">Загрузить</a>
+                                </div>
+                            </div>
+                        </li>
+                        <!-- Wait for approve -->
+                        <li>
+                            <!-- timeline icon -->
+                            <i class="fa fa-clock-o bg-aqua"></i>
+                            <div class="timeline-item">
+                                <h3 class="timeline-header">Дождитесь допуска к участию в конкурсе</h3>
+                                <div class="timeline-body">
+                                    Если Вы представили все необходимые документы и были допущены к участию в конкурсе,
+                                    Вы сможете увидеть отметку о статусе поданного заявления.<br>
+                                </div>
+                                <div class="timeline-footer">
+                                    Отметка о том, что Ваши документы были просмотрены и одобрены Комиссией по приему
+                                    документов, появится в разделе «Заявление», страница «Просмотр заявления».
+                                </div>
+                            </div>
+                        </li>+
+                        <!-- Exams&Results -->
+                        <li>
+                            <!-- timeline icon -->
+                            <i class="fa fa-university bg-aqua"></i>
+
+                            <div class="timeline-item">
+                                <h3 class="timeline-header">Отслеживайте свою положение в конкурсных списка</h3>
+                                <div class="timeline-body">
+
+                                    <strong></strong>
+
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+
+
+        </section>
+    </div>
+
+
+
+    <div class="control-sidebar-bg"></div>
+</div>
+
+
+<div th:replace="fragments/footer :: footer"/>
+
+</body>
+</html>

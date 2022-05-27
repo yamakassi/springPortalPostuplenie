@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Spring Security Example </title>
+    <div th:replace="fragments/header :: header-css"/>
+</head>
+<body>
+
+<div th:replace="fragments/header :: header"/>
+
+<div class="wrapper" style="overflow: hidden; height: auto; min-height: 100%;">
+    <!-- Left side column. contains the sidebar -->
+    <aside th:replace="fragments/lev-sitebar :: lev-sitebar"/>
+     <div class="content-wrapper" style="min-height: 368px;">
+        <section class="content-header">
+            <h1>
+                Личные данные
+
+            </h1>
+
+        </section>
+          <section class="content">
+
+
+            <div class="row">
+                <div class="col-xs-12">
+                    <form id="form" class="form-horizontal" th:action="@{/lk/PersonalInfo}" method="post"
+                          >
+                        <div class="validation-summary-valid" data-valmsg-summary="true">
+                            <ul>
+                                <li style="display:none"></li>
+                            </ul>
+                        </div>
+                        <input data-val="true" data-val-required="Требуется поле Enabled." id="Enabled" name="Enabled"
+                               type="hidden" value="True">
+                        <div class="form-group">
+                            <div class="col-md-3 col-xs-12 control-label">
+                                <label for="Surname">Фамилия</label>
+                                <span class="text-danger">*</span>
+                            </div>
+                            <div class="col-md-8 col-xs-12">
+                                <input class="form-control" id="Surname" name="surname" type="text" th:attr="value = ${persInfo?.surname }">
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-3 col-xs-12 control-label">
+                                <label for="Name">Имя</label>
+                                <span class="text-danger">*</span>
+                            </div>
+                            <div class="col-md-8 col-xs-12">
+                                <input class="form-control" id="Name" name="name" type="text" th:attr="value = ${persInfo?.name}">
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-3 col-xs-12 control-label">
+                                <label for="patronymic">Отчество</label>
+                            </div>
+                            <div class="col-md-8 col-xs-12">
+                                <input class="form-control" id="patronymic" name="patronymic" type="text"
+                                       th:attr="value = ${persInfo?.patronymic}">
+
+                            </div>
+                        </div>
+
+
+
+                        <div class="form-group">
+                            <div class="col-md-3 col-xs-12 control-label">
+                                <label for="Sex" title="Необходимое поле ">Пол</label>
+                                <span class="text-danger">*</span>
+                            </div>
+                            <div class="col-md-8 col-xs-12">
+                                <select class="form-control select2-hidden-accessible" id="Sex" name="sex" tabindex="-1"
+                                        aria-hidden="true">
+                                    <option selected="selected" value="1">Муж</option>
+                                    <option value="0">Жен</option>
+                                </select></div>
+                        </div>
+                   <!--     <div class="form-group">
+                            <div class="col-md-3 col-xs-12 control-label">
+                                <label for="BirthDate" title="Необходимое поле ">Дата рождения</label>
+                                <span class="text-danger">*</span>
+                            </div>
+                            <div class="col-md-8 col-xs-12">
+                                <div class="input-group date">
+                                    <input class="form-control" id="BirthDate" name="birthDate" type="date"
+                                           >
+                                    <div class="input-group-addon">
+                                        <span class="fa fa-calendar fa-fw"></span>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>-->
+                        <div class="form-group">
+                            <div class="col-md-3 col-xs-12 control-label">
+                                <label for="birthPlace" title="Необходимое поле ">Место рождения</label>
+                                <span class="text-danger">*</span>
+                            </div>
+                            <div class="col-md-8 col-xs-12">
+                                <input class="form-control" id="birthPlace" name="birthPlace" type="text"
+                                       th:attr="value = ${persInfo?.birthPlace}">
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-3 col-xs-12 control-label">
+                                <label for="countryOfBirth" title="Необходимое поле ">Страна рождения</label>
+                                <span class="text-danger">*</span>
+                            </div>
+                            <div class="col-md-8 col-xs-12">
+                                <select class="form-control select2-hidden-accessible" id="countryOfBirth"
+                                        name="countryOfBirth" tabindex="-1" aria-hidden="true">
+                                    <option selected="selected" value="193">Россия</option>
+                                    <option value="236">Украина</option>
+                                    <option value="23">Беларусь</option>
+                                    <option value="125">Казахстан</option>
+                                    <option value="131">Кыргызстан</option>
+                                    <option value="233">Туркменистан</option>
+                                    <option value="89">Грузия</option>
+                                    <option value="156">Молдавия</option>
+                                    <option value="12">Армения</option>
+
+                                    <option value="252">Лицо без гражданства</option>
+
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-3 col-xs-12 control-label">
+                                <label for="nationality" title="Необходимое поле ">Гражданство</label>
+                                <span class="text-danger">*</span>
+                            </div>
+                            <div class="col-md-8 col-xs-12">
+                                <select class="form-control select2-hidden-accessible" id="nationality"
+                                        name="nationality" tabindex="-1" aria-hidden="true">
+                                    <<option selected="selected" value="193">Россия</option>
+                                    <option value="236">Украина</option>
+                                    <option value="23">Беларусь</option>
+                                    <option value="125">Казахстан</option>
+                                    <option value="131">Кыргызстан</option>
+                                    <option value="233">Туркменистан</option>
+                                    <option value="89">Грузия</option>
+                                    <option value="156">Молдавия</option>
+                                    <option value="12">Армения</option>
+
+                                    <option value="252">Лицо без гражданства</option>
+
+                                </select>
+                            </div>
+                        </div>
+                        <div id="_HasRussianNationality" class="form-group" style="display:none;">
+                            <div class="col-md-8 col-md-offset-3 col-xs-12">
+                                <label>
+                                    <input checked="checked" data-val="true"
+                                           data-val-required="Требуется поле HasRussianNationality."
+                                           id="HasRussianNationality" name="hasRussianNationality" type="checkbox"
+                                           value="true"><input name="hasRussianNationality" type="hidden" value="false">
+                                    Имею гражданство РФ
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-3 col-xs-12 control-label">
+                                <label for="CountryId" title="Необходимое поле ">Страна проживания</label>
+                                <span class="text-danger">*</span>
+                            </div>
+                            <div class="col-md-8 col-xs-12">
+                                <select class="form-control select2-hidden-accessible" id="CountryId" name="countryId"
+                                        tabindex="-1" aria-hidden="true">
+                                    <option selected="selected" value="193">Россия</option>
+                                    <option value="236">Украина</option>
+                                    <option value="23">Беларусь</option>
+                                    <option value="125">Казахстан</option>
+                                    <option value="131">Кыргызстан</option>
+                                    <option value="233">Туркменистан</option>
+                                    <option value="89">Грузия</option>
+                                    <option value="156">Молдавия</option>
+                                    <option value="12">Армения</option>
+
+                                    <option value="252">Лицо без гражданства</option>
+
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-offset-3 col-md-8 col-xs-12"><span class="Red">*</span> - Необходимое
+                                поле
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-offset-9 col-md-2 col-xs-offset-6 col-xs-6">
+                                <button id="btnSubmit" class="btn btn-block btn-success" type="submit">
+                                    Сохранить
+                                    <span class="glyphicon glyphicon-menu-right"></span>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+
+        </section>
+    </div>
+
+</div>
+
+<div th:replace="fragments/footer :: footer"/>
+
+</body>
+</html>

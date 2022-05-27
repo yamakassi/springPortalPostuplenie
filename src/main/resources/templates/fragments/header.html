@@ -14,27 +14,50 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
               rel="stylesheet"
               integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
               crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.2/font/bootstrap-icons.css">
+        <link href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" rel="stylesheet">
 
+        <style>
+            .svg-inline--fa.fa-warning {
+                width: 2em;
+                height: 2em;
+            }
+        </style>
         <title>portal</title>
     </div>
+
 </head>
 <body>
 <div th:fragment="header">
+
     <!-- this is header -->
-    <nav class="navbar navbar-dark bg-dark">
+    <nav class="navbar navbar-dark bg-dark mb-0">
         <div class="container-fluid">
             <a href="/">
                 <span class="navbar-brand mb-0 h1">portal</span>
             </a>
 
+            <div sec:authorize="isAuthenticated()" class="dropstart">
+                <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                    <img
+                            th:src="@{/images/{id}(id=${1})}"
+                            class="rounded-circle"
+                            height="50"
+                            alt="avatar"
+                            loading="lazy"
+                    />
+                </a>
 
-            <div sec:authorize="isAuthenticated()" >
-                <a href="/profile" > Профиль</a>
-                <form th:action="@{/logout}" method="post">
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                    <li><a  class="dropdown-item" role="button" href="/profile" > Профиль</a></li>
+                    <li><form th:action="@{/logout}" method="post">
 
-                    <input type="submit" value="выход"/>
-                </form>
+                        <input class="dropdown-item" type="submit"  value="выход"/>
+                    </form></li>
+
+                </ul>
             </div>
+
 
             <button sec:authorize='isAnonymous()' class="btn btn-light my-2 my-sm-0" type="button"
                     onclick="window.location.href = '/login'">

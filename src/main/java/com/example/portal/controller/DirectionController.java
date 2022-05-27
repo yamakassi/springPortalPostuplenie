@@ -2,20 +2,14 @@ package com.example.portal.controller;
 
 import com.example.portal.domain.Application;
 import com.example.portal.domain.Direction;
-import com.example.portal.domain.Institute;
-import com.example.portal.domain.User;
 import com.example.portal.services.DirectionService;
-import com.example.portal.services.InstituteService;
 import com.example.portal.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
 import java.security.Principal;
-import java.util.List;
 import java.util.Set;
 
 @Controller
