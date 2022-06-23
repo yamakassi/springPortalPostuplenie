@@ -15,11 +15,12 @@ public class ExamsDTO {
     private List<String> nameExamDTO = new ArrayList<>();
     private List<Integer> valueExamDTO = new ArrayList<>();
 
-    public List<Exam>   transferExam(User user){
+    public List<Exam> transferExam(User user) {
         List<Exam> exams = new ArrayList<>();
-        if(nameExamDTO.size()!=valueExamDTO.size()) throw new IllegalStateException(" count of exams does not match with the scores");
-        for(int i=0;i<nameExamDTO.size();i++){
-            exams.add(new Exam(nameExamDTO.get(i),valueExamDTO.get(i),user));
+        if (nameExamDTO.size() != valueExamDTO.size())
+            throw new IllegalStateException(" count of exams does not match with the scores");
+        for (int i = 0; i < nameExamDTO.size(); i++) {
+            exams.add(new Exam(nameExamDTO.get(i), valueExamDTO.get(i), user));
         }
         return exams;
     }

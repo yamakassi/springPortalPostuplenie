@@ -22,10 +22,10 @@ public class Exam {
     @JoinColumn
     private User user;
 
-    public Exam(String nameExam, Integer valueExam,User user) {
-        this.nameExam=nameExam;
-        this.valueExam=valueExam;
-        this.user= user ;
+    public Exam(String nameExam, Integer valueExam, User user) {
+        this.nameExam = nameExam;
+        this.valueExam = valueExam;
+        this.user = user;
 
     }
 

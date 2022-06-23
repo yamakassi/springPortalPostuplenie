@@ -26,17 +26,19 @@ public class Direction {
 
     @ManyToOne(cascade = CascadeType.REFRESH)
     @JoinColumn
-    private  Institute institute;
-
+    private Institute institute;
+    @Column(nullable = true)
+    private Integer placeCount;
 
     public void addApplication(Application appl) {
         this.applications.add(appl);
 
     }
 
+
     public void removeApplication(Application appl) {
         this.applications.remove(appl);
-        appl.getDirections().remove(this);
+
     }
 
     @Override
@@ -45,12 +47,10 @@ public class Direction {
                 "id=" + id +
                 ", abbr='" + abbr + '\'' +
                 ", title='" + title + '\'' +
-                ", applications=" + applications +
-                ", institute=" + institute.getAbbr() +
+
 
                 '}';
     }
-
 
 
 }

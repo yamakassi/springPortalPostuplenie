@@ -19,96 +19,158 @@
             </h1>
 
         </section>
-        <section class="content">
+        <div th:if="${user?.getApplication()?.getStatusApp() == T(com.example.portal.domain.enums.Status).REVIEW}" style="    background-color: #3dbabf;
+     font-size: 20px; margin: 5px 15px; padding: 8px;
+    color: #fff !important;">Выше заявление находится на рассмотрении и будет обработано в течении 3-х дней.</div>
+        <div th:if="${user?.getApplication()?.getStatusApp() == T(com.example.portal.domain.enums.Status).REJECT}" style="    background-color: #dd4b39;;
+     font-size: 20px; margin: 5px 15px; padding: 8px;
+    color: #fff !important;">Выше заявление отклонено. Комментарий</div>
+        <div th:if="${user?.getApplication()?.getStatusApp() == T(com.example.portal.domain.enums.Status).ACCEPT}" style="    background-color: #70dd39;;
+     font-size: 20px; margin: 5px 15px; padding: 8px;
+    color: #fff !important;">Выше заявление принято. /*монит за своим */ </div>
+      <div th:if="${user?.getApplication()?.getStatusApp() == T(com.example.portal.domain.enums.Status).UPLOAD}" ><section  class="content"  >
 
 
 
-            <div class="row">
-                <div class="col-xs-12">
-                    <div class="row">
-                        <div class="col-xs-12">
-                            <div class="box info-box">
-                                <div class="box-tools pull-right">
-                                    <button type="button" class="btn btn-box-tool" data-widget="remove">
-                                        <i class="fa fa-times"></i>
-                                    </button>
-                                </div>
-                                <div class="info-box-icon bg-aqua">
-                                    <i class="fa fa-warning"></i>
-                                </div>
-                                <div class="info-box-content">
-                                    <div class="info-box-text"><h5>ВНИМАНИЕ</h5></div>
-                                    <div>
-                                        <b>Каждый документ следует загружать одним цельным файлом в формате PDF</b>. <br>Для загрузки фотографии можно использовать файлы JPG (JPEG, PNG).
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+          <div class="row" >
+              <div class="col-xs-12">
+                  <div class="row">
+                      <div class="col-xs-12">
+                          <div class="box info-box">
+                              <!--<div class="box-tools pull-right">
+                                  <button type="button" class="btn btn-box-tool" data-widget="remove">
+                                      <i class="fa fa-times"></i>
+                                  </button>
+                              </div> -->
+                              <div class="info-box-icon bg-aqua">
+                                  <i class="fa fa-warning"></i>
+                              </div>
+                              <div class="info-box-content">
+                                  <div class="info-box-text"><h5>ВНИМАНИЕ</h5></div>
+                                  <div>
+                                      <b>Каждый документ следует загружать одним цельным файлом в формате PDF</b>. <br>Для загрузки фотографии можно использовать файлы JPG (JPEG, PNG).
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
 
-                    <div class="box box-widget">
-                        <div class="box-body">
-                        </div>
-                    </div>
-
-
-                    <ul class="nav nav-tabs">
-                        <li class="active">
-                            <a>
-                                Общие файлы
-                            </a>
-                        </li>
-                    </ul>
-
-                    <div class="box box-widget">
-                        <div class="box-header with-border">
-                            <i class="glyphicon glyphicon-list"></i> <strong style="font-size:16pt">Общие файлы</strong>
-                        </div>
-                        <div class="box-body">
-                            <form action="/Files/AddPersonFile" method="post" enctype="multipart/form-data" class="form-horizontal" onsubmit="ValidateInput('1')">
-                                <div class="form-group">
-                                    <div class="col-md-3 col-xs-12 control-label">
-                                        <label for="FileTypeId">Тип файла</label>
-                                    </div>
-                                    <div class="col-md-8 col-xs-12">
-                                        <select class="form-control" id="fileType" name="FileTypeId" onchange="OnSelectedChanged()"></select>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="col-md-3 col-xs-12 control-label">
-                                        <label>Файл</label>
-                                    </div>
-                                    <div class="col-md-6 col-xs-9">
-                                        <input id="fileAttachment" type="file" name="File" onchange="ValidateInput()">
-                                    </div>
-                                    <div class="col-md-offset-0 col-md-2 col-xs-3" style="padding-left:5px;">
-                                        <button class="btn btn-success pull-right" type="submit">Загрузить</button>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="col-md-3 col-xs-12 control-label">
-                                        <label>Комментарий</label>
-                                    </div>
-                                    <div class="col-md-8 col-xs-12">
-                                        <textarea name="Comment" class="form-control"></textarea>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                        <div class="box-footer">
-                            <h4>Нет файлов</h4>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                  <div class="box box-widget">
+                      <div class="box-body">
+                      </div>
+                  </div>
 
 
-        </section>
+                  <ul class="nav nav-tabs">
+                      <li class="active">
+                          <a>
+                              Общие файлы
+                          </a>
+                      </li>
+                  </ul>
+
+                  <div class="box box-widget">
+                      <div class="box-header with-border">
+                          <i class="glyphicon glyphicon-list"></i> <strong style="font-size:16pt">Общие файлы</strong>
+                      </div>
+                      <div class="box-body">
+                          <form th:action="@{/lk/AddFile}" method="post" enctype="multipart/form-data" class="form-horizontal" >
+                              <div class="form-group">
+                                  <div class="col-md-3 col-xs-12 control-label">
+                                      <label for="fileType">Тип файла</label>
+                                  </div>
+                                  <div class="col-md-8 col-xs-12">
+                                      <select class="form-control w-75" id="fileType" name="fileType" >
+                                          <option  value="passport">Удостоверение личности</option>
+                                          <option   value="passport">фото 3х4</option>
+                                          <option  value="education">Документ об образовании</option>
+                                          <option  value="application">Заявление на поступление </option>
+                                          <option  value="specialRights">Документы, подтверждающие особые права на поступление </option>
+                                          <option  value="celevoeObuch">Договор о целевом обучении для поступающих на целевое. </option>
+                                          <option  value="individ"> Документы, подтверждающие индивидуальные достижения. </option>
+
+                                          <option  value="olip">Документы, подтверждающие олимпиады.</option>
+
+                                          <option  value="other">Дополнительные документы</option>
+
+
+
+                                      </select>
+                                  </div>
+                              </div>
+                              <div class="form-group d-flex mt-1">
+                                  <div class="col-md-6 col-xs-9">
+                                      <input id="fileAttachment" type="file" name="file" >
+                                  </div>
+                                  <div class="col-md-offset-0 col-md-2 col-xs-3" style="padding-left:5px;">
+                                      <button class="btn btn-success pull-right" type="submit">Загрузить</button>
+                                  </div>
+                              </div>
+                              <div class="form-group">
+                                  <div class="col-md-3 col-xs-12 control-label">
+                                      <label>Комментарий</label>
+                                  </div>
+                                  <div class="col-md-8 col-xs-12">
+                                      <textarea name="comment" class="form-control"></textarea>
+                                  </div>
+                              </div>
+                          </form>
+                      </div>
+                      <div th:if="${files.size()>=3}">
+                          <button class="btn btn-info" id="btn-confirm" style="padding:8px 12px;margin:0 auto;">Закончить загрузку документов</button>
+                          <div id="user-none" style="display:none" ></div>
+                      </div>
+                      <div class="box-footer">
+
+
+
+                          <div class="d-flex" th:each="file,state:${files}" >
+                              <b th:text="${state.count}"></b>
+                              <span th:text="${file.getName()}"></span>
+                              <a th:href="@{/images/{id}(id=${file.getId()})}" th:target="_blank"  > посмотреть</a>
+                          </div>
+                      </div>
+
+
+
+                  </div>
+              </div>
+          </div>
+
+
+      </section></div>
     </div>
 
 </div>
 
 <div th:replace="fragments/footer :: footer"/>
+<script th:inline="javascript">
 
+    let username = [[${user.getUsername()}]];
+    const confirmBtn = document.getElementById("btn-confirm");
+
+    if(username!=null) {
+        confirmBtn.addEventListener("click", (e) => {
+
+            e.preventDefault();
+            console.log("777")
+            const url = "http://localhost:8081/app/" + username + "/review";
+            console.log(url);
+            fetch(url, {
+                method: "POST",
+                headers: {
+                    Accept: "application/json",
+                    "Content-Type": "application/json",
+
+                },
+            })
+                .then((data)=>{
+                    window.location.reload();
+                    console.log(data)
+                })
+
+        });
+    }
+</script>
 </body>
 </html>

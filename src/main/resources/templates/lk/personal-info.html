@@ -18,14 +18,14 @@
 
             </h1>
 
-        </section>
+        </section>+
           <section class="content">
 
 
             <div class="row">
                 <div class="col-xs-12">
-                    <form id="form" class="form-horizontal" th:action="@{/lk/PersonalInfo}" method="post"
-                          >
+                    <form id="form" class="form-horizontal" th:action="@{/lk/PersonalInfo}" th:method="post">
+
                         <div class="validation-summary-valid" data-valmsg-summary="true">
                             <ul>
                                 <li style="display:none"></li>
@@ -39,7 +39,7 @@
                                 <span class="text-danger">*</span>
                             </div>
                             <div class="col-md-8 col-xs-12">
-                                <input class="form-control" id="Surname" name="surname" type="text" th:attr="value = ${persInfo?.surname }">
+                                <input class="form-control" id="Surname" name="surname" type="text" required th:attr="value = ${persInfo?.surname }">
 
                             </div>
                         </div>
@@ -49,7 +49,7 @@
                                 <span class="text-danger">*</span>
                             </div>
                             <div class="col-md-8 col-xs-12">
-                                <input class="form-control" id="Name" name="name" type="text" th:attr="value = ${persInfo?.name}">
+                                <input class="form-control" id="Name" name="name" type="text" th:attr="value = ${persInfo?.name}" required>
 
                             </div>
                         </div>
@@ -73,12 +73,12 @@
                             </div>
                             <div class="col-md-8 col-xs-12">
                                 <select class="form-control select2-hidden-accessible" id="Sex" name="sex" tabindex="-1"
-                                        aria-hidden="true">
-                                    <option selected="selected" value="1">Муж</option>
-                                    <option value="0">Жен</option>
+                                        aria-hidden="true" required>
+                                    <option th:selected="${persInfo?.sex==1}" value="1">Муж</option>
+                                    <option th:selected="${persInfo?.sex==0}" value="0">Жен</option>
                                 </select></div>
                         </div>
-                   <!--     <div class="form-group">
+                      <div class="form-group">
                             <div class="col-md-3 col-xs-12 control-label">
                                 <label for="BirthDate" title="Необходимое поле ">Дата рождения</label>
                                 <span class="text-danger">*</span>
@@ -93,7 +93,6 @@
                                 </div>
 
                             </div>
-                        </div>-->
                         <div class="form-group">
                             <div class="col-md-3 col-xs-12 control-label">
                                 <label for="birthPlace" title="Необходимое поле ">Место рождения</label>
@@ -101,7 +100,7 @@
                             </div>
                             <div class="col-md-8 col-xs-12">
                                 <input class="form-control" id="birthPlace" name="birthPlace" type="text"
-                                       th:attr="value = ${persInfo?.birthPlace}">
+                                       th:attr="value = ${persInfo?.birthPlace}" required>
 
                             </div>
                         </div>
@@ -112,41 +111,41 @@
                             </div>
                             <div class="col-md-8 col-xs-12">
                                 <select class="form-control select2-hidden-accessible" id="countryOfBirth"
-                                        name="countryOfBirth" tabindex="-1" aria-hidden="true">
-                                    <option selected="selected" value="193">Россия</option>
-                                    <option value="236">Украина</option>
-                                    <option value="23">Беларусь</option>
-                                    <option value="125">Казахстан</option>
-                                    <option value="131">Кыргызстан</option>
-                                    <option value="233">Туркменистан</option>
-                                    <option value="89">Грузия</option>
-                                    <option value="156">Молдавия</option>
-                                    <option value="12">Армения</option>
+                                        name="countryOfBirth" tabindex="-1" aria-hidden="true" required>
+                                    <option  th:selected="${persInfo?.countryOfBirth==193}" value="193">Россия</option>
+                                    <option th:selected="${persInfo?.countryOfBirth==236}" value="236">Украина</option>
+                                    <option th:selected="${persInfo?.countryOfBirth==23}" value="23">Беларусь</option>
+                                    <option th:selected="${persInfo?.countryOfBirth==125}" value="125">Казахстан</option>
+                                    <option th:selected="${persInfo?.countryOfBirth==131}" value="131">Кыргызстан</option>
+                                    <option th:selected="${persInfo?.countryOfBirth==233}" value="233">Туркменистан</option>
+                                    <option th:selected="${persInfo?.countryOfBirth==89}"value="89">Грузия</option>
+                                    <option th:selected="${persInfo?.countryOfBirth==156}" value="156">Молдавия</option>
+                                    <option th:selected="${persInfo?.countryOfBirth==12}"value="12">Армения</option>
 
-                                    <option value="252">Лицо без гражданства</option>
+                                    <option th:selected="${persInfo?.countryOfBirth==225}" value="252">Лицо без гражданства</option>
 
                                 </select>
                             </div>
                         </div>
-                        <div class="form-group">
+                    <div class="form-group">
                             <div class="col-md-3 col-xs-12 control-label">
                                 <label for="nationality" title="Необходимое поле ">Гражданство</label>
                                 <span class="text-danger">*</span>
                             </div>
                             <div class="col-md-8 col-xs-12">
                                 <select class="form-control select2-hidden-accessible" id="nationality"
-                                        name="nationality" tabindex="-1" aria-hidden="true">
-                                    <<option selected="selected" value="193">Россия</option>
-                                    <option value="236">Украина</option>
-                                    <option value="23">Беларусь</option>
-                                    <option value="125">Казахстан</option>
-                                    <option value="131">Кыргызстан</option>
-                                    <option value="233">Туркменистан</option>
-                                    <option value="89">Грузия</option>
-                                    <option value="156">Молдавия</option>
-                                    <option value="12">Армения</option>
+                                        name="nationality" tabindex="-1" aria-hidden="true" required>
+                                    <option  th:selected="${persInfo?.nationality==193}" value="193">Россия</option>
+                                    <option th:selected="${persInfo?.nationality==236}" value="236">Украина</option>
+                                    <option th:selected="${persInfo?.nationality==89}"value="89">Грузия</option>
+                                    <option th:selected="${persInfo?.nationality==125}" value="125">Казахстан</option>
+                                    <option th:selected="${persInfo?.nationality==23}" value="23">Беларусь</option>
+                                    <option th:selected="${persInfo?.nationality==131}" value="131">Кыргызстан</option>
+                                    <option th:selected="${persInfo?.nationality==233}" value="233">Туркменистан</option>
+                                    <option th:selected="${persInfo?.nationality==156}" value="156">Молдавия</option>
+                                    <option th:selected="${persInfo?.nationality==12}"value="12">Армения</option>
 
-                                    <option value="252">Лицо без гражданства</option>
+                                    <option th:selected="${persInfo?.nationality==225}" value="252">Лицо без гражданства</option>
 
                                 </select>
                             </div>
@@ -169,31 +168,41 @@
                             </div>
                             <div class="col-md-8 col-xs-12">
                                 <select class="form-control select2-hidden-accessible" id="CountryId" name="countryId"
-                                        tabindex="-1" aria-hidden="true">
-                                    <option selected="selected" value="193">Россия</option>
-                                    <option value="236">Украина</option>
-                                    <option value="23">Беларусь</option>
-                                    <option value="125">Казахстан</option>
-                                    <option value="131">Кыргызстан</option>
-                                    <option value="233">Туркменистан</option>
-                                    <option value="89">Грузия</option>
-                                    <option value="156">Молдавия</option>
-                                    <option value="12">Армения</option>
+                                        tabindex="-1" aria-hidden="true"  required>
+                                    <option  th:selected="${persInfo?.countryId==193}" value="193">Россия</option>
+                                    <option th:selected="${persInfo?.countryId==236}" value="236">Украина</option>
+                                    <option th:selected="${persInfo?.countryId==23}" value="23">Беларусь</option>
+                                    <option th:selected="${persInfo?.countryId==125}" value="125">Казахстан</option>
+                                    <option th:selected="${persInfo?.countryId==131}" value="131">Кыргызстан</option>
+                                    <option th:selected="${persInfo?.countryId==233}" value="233">Туркменистан</option>
+                                    <option th:selected="${persInfo?.countryId==89}"value="89">Грузия</option>
+                                    <option th:selected="${persInfo?.countryId==156}" value="156">Молдавия</option>
+                                    <option th:selected="${persInfo?.countryId==12}"value="12">Армения</option>
+                                    <option th:selected="${persInfo?.countryId==225}" value="252">Лицо без гражданства</option>
 
-                                    <option value="252">Лицо без гражданства</option>
 
                                 </select>
                             </div>
                         </div>
                         <div class="form-group">
-                            <div class="col-md-offset-3 col-md-8 col-xs-12"><span class="Red">*</span> - Необходимое
-                                поле
+                            <div class="col-md-3 col-xs-12 control-label">
+                                <label for="snil">снилс</label>
+                            </div>
+                            <div class="col-md-8 col-xs-12">
+                                      >
+                                <input class="form-control" id="snil" name="snils" th:attr="value = ${persInfo?.snils}" type="text" >
+
                             </div>
                         </div>
                         <div class="form-group">
+                            <div class="col-md-offset-3 col-md-8 col-xs-12"><span class="Red">*</span> - Необходимое
+                                поле
+                        </div>
+                            </div>
+                        <div class="form-group">
                             <div class="col-md-offset-9 col-md-2 col-xs-offset-6 col-xs-6">
                                 <button id="btnSubmit" class="btn btn-block btn-success" type="submit">
-                                    Сохранить
+                                    Далее
                                     <span class="glyphicon glyphicon-menu-right"></span>
                                 </button>
                             </div>

@@ -15,10 +15,21 @@ public class Passport {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private int series;
-    private int passportNumber;
+    private String series;
+    private String passportNumber;
     private String passportAuthor;
     private Date passportDate;
-    private int passportCode;
-    private String snils;
+    private String passportCode;
+
+    public Passport() {
+    }
+
+    ;
+
+    public boolean isCheckRequiredFieldsFilled() {
+
+        if (null == this.series || null == this.passportNumber || null == this.passportAuthor || null == this.passportCode) {
+            return false;
+        } else return true;
+    }
 }

@@ -21,7 +21,6 @@ public class DirectionController {
     private UserService userService;
 
 
-
     @GetMapping("/{directionName}")
     public String direction(@PathVariable String instAbbr,
                             @PathVariable String directionName,
@@ -30,22 +29,24 @@ public class DirectionController {
 
 
         model.addAttribute("user", principal.getName());
-        model.addAttribute("direction",directionService.getDirectionByInstituteAbbr(instAbbr,directionName));
+        model.addAttribute("direction", directionService.getDirectionByInstituteAbbr(instAbbr, directionName));
         return "direction-info";
     }
-    @PostMapping("/create")
-    public  String createDirection(@PathVariable String instAbbr,Direction direction)  {
 
-       directionService.saveDirection(direction,instAbbr);
-        return  "redirect:/institute/{instAbbr}/";
+    @PostMapping("/create")
+    public String createDirection(@PathVariable String instAbbr, Direction direction) {
+
+        directionService.saveDirection(direction, instAbbr);
+        return "redirect:/institute/{instAbbr}/";
     }
+
     @GetMapping("/{directionName}/app")
     public String findApplication(@PathVariable String instAbbr,
                                   @PathVariable String directionName,
-                                  Model model){
+                                  Model model) {
 
-        Set<Application> applicationList =  directionService.getDirectionByInstituteAbbr(instAbbr,directionName).getApplications();
-        model.addAttribute("applications",applicationList);
+        Set<Application> applicationList = directionService.getDirectionByInstituteAbbr(instAbbr, directionName).getApplications();
+        model.addAttribute("applications", applicationList);
         return "list-applications";
     }
    /* @PostMapping("/delete/{directionName}")

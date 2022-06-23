@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Spring Security Example </title>
+    <div th:replace="fragments/header :: header-css"/>
+</head>
+<body>
+
+<div th:replace="fragments/header :: header"/>
+
+<div class="container mx-auto w-75 align-items-center ">
+
+<div>
+
+    <aside th:replace="fragments/lev-sitebar :: lev-sitebar"/>
+
+    <div class="content-wrapper" style="min-height: 368px;">
+    <form th:action="@{/lk/spravka}" method="post" class="form-horizontal" >
+
+    <div class="form-group" >
+        <div class="col-md-3 col-xs-12 control-label">
+            <label for="snils">CНИЛС</label>
+            <span class="text-danger">*</span>
+            <span th:text="${pass?.snils}"></span>
+        </div>
+        <!--привязать к личным данным  -->
+        <div class="col-md-8 col-xs-12">
+
+            <input class="form-control" disabled="disabled" id="snils" name="snils"
+                   title="Изменить снилс  Вы можете на странице &quot;паспорт&quot;"
+                   type="text"  th:value="${pass?.snils}"  >
+        </div>
+    </div>
+
+
+
+
+    <div th:if="${spravka}" >
+
+        <h2>Справка есть: здоров</h2>
+    </div>
+
+    <div th:unless="${spravka}">
+        <h2>Справка отсутствует</h2>
+        <div class="form-group">
+
+            <div class="col-md-offset-3 col-md-3 col-xs-offset-1 col-xs-6">
+                <button id="btnSubmit" class="btn btn-block btn-success" type="submit">
+                    Загрузить
+                    <span class="glyphicon glyphicon-menu-right"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+    </form>
+
+</div>
+
+</div>
+</div>
+<div th:replace="fragments/footer :: footer"/>
+
+</body>
+</html>

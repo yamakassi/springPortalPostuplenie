@@ -10,19 +10,71 @@
 
 <div class="container mx-auto w-75 align-items-center ">
 
-    <h1>Пользователь <span th:text="${user.email}"></span></h1>
+    <h1>Пользователь <span th:text="${user.getPersonalInfo().getSnils()}"></span></h1>
     <hr>
-    <div th:each="exam: ${user.exams}">
-        <div><span th:text="${exam.nameExam}"></span>
-            <span th:text="${exam.valueExam}"></span></div>
+    <strong > Документы поступающего </strong>
+    <div class="d-flex" th:each="image,state:${user.getImages()}" >
+        <b th:text="${state.count}"></b>
+        <span th:text="${image.getName()}"></span>
+        <a th:href="@{/images/{id}(id=${image.getId()})}" th:target="_blank"  > посмотреть</a>
     </div>
-    <h5>Информация</h5>
-    <hr>
-
+    <hr>    <div style="flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: space-between;
+  display: flex;">
+    <button class="btn btn-info" id="btn-accept" style="padding:5px 8px;margin:5px auto;">Принять</button>
+    <button class="btn btn-danger" id="btn-reject" style="padding:5px 8px;margin:5px auto;">Отклонить</button>
+</div>
 
 </div>
 
 <div th:replace="fragments/footer :: footer"/>
+<script th:inline="javascript">
 
+    let username = [[${user.getUsername()}]];
+    const acceptBrn = document.getElementById("btn-accept");
+ const reject = document.getElementById("btn-reject");
+
+    if(username!=null) {
+        acceptBrn.addEventListener("click", (e) => {
+
+            e.preventDefault();
+            console.log("777")
+            const url = "http://localhost:8081/app/" + username + "/accept";
+            console.log(url);
+            fetch(url, {
+                method: "POST",
+                headers: {
+                    Accept: "application/json",
+                    "Content-Type": "application/json",
+
+                },
+            })
+                .then((data)=>{
+                    window.close();
+                })
+
+        });
+        reject.addEventListener("click", (e) => {
+
+            e.preventDefault();
+            console.log("777")
+            const url = "http://localhost:8081/app/" + username + "/reject";
+            console.log(url);
+            fetch(url, {
+                method: "POST",
+                headers: {
+                    Accept: "application/json",
+                    "Content-Type": "application/json",
+
+                },
+            })
+                .then((data)=>{
+                    window.close();
+                })
+
+        });
+    }
+</script>
 </body>
 </html>

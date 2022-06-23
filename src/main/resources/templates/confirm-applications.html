@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Spring Security Example </title>
+
     <div th:replace="fragments/header :: header-css"/>
 </head>
 <body>
@@ -9,10 +9,12 @@
 <div th:replace="fragments/header :: header"/>
 
 <div class="container">
-  <div th:each="app:${applications}">
+    <h3 style="margin:0 auto;">Список заявлений <strong > </strong></h3>
+  <div th:each="app,state:${applications}">
+      <b th:text="${state.count}" style="margin:5px 8px"></b>
+      <span th:text="${app.user.getPersonalInfo().getSnils()}"></span>
+      <a th:href="@{/user/{id}(id=${app.user.getId()})}" th:target="_blank"  > посмотреть</a>
 
-          <span th:text="${app.snils}"></span>
-          <span th:text="${app.registered}"></span>
 
 
   </div>

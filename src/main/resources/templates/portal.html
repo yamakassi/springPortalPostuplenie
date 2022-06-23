@@ -1,40 +1,55 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Spring Security Example </title>
     <div th:replace="fragments/header :: header-css"/>
+    <link rel="stylesheet" th:href="@{/css/card.css}" href="/static/css/card.css">
+
 </head>
 <body>
 
 <div th:replace="fragments/header :: header"/>
 
 <div class="container mx-auto w-75 align-items-center ">
+    <div class="title h1 text-center">Институты</div>
 
-    <h5>Направления</h5>
+    <div class="container py-3">
 
-    <div th:each="inst:${institute}">
-        <p th:text="${inst.title}"></p>
-        <span th:text="${inst.description}">        </span>
+        <!-- Card Start -->
+        <div class="card" th:each="inst:${institute}">
+            <div class="row ">
 
-        <a th:href="@{/institute/{abbr}(abbr=${inst.getAbbr()})}">об</a>
+                <div class="col-md-7 px-3">
+                    <div class="card-block px-6">
+                        <h4 class="card-title" th:text="${inst?.title}"> </h4>
+
+
+
+                        <p class="card-text"  th:text="${inst?.description}"></p>
+                        <br>
+                        <a th:href="@{/institute/{abbr}(abbr=${inst?.getAbbr()})}" class="mt-auto btn btn-primary  ">Смотреть направления</a>
+                    </div>
+                </div>
+
+                <div class="col-md-5">
+
+
+
+                    <img th:src="@{/images/{id}(id=${inst?.getImage()?.getId()})}" height="170px">
+                </div>
+            </div>
+        </div>
+        <!-- End of carousel -->
     </div>
+</div>
+<!-- End of card -->
+
+</div>
 
 
-<!-- перенос в superAdmin panel -->
-    <div class="mx-auto w-25">
-<h3>Добавить институт</h3>
 
-<form th:action="@{/institute/create}" method="post"  class="align-items-center b" enctype="multipart/form-data">
-    Название института : <input type="text" name="title" class="form-control">
-    Сокращение института : <input type="text" name="abbr" class="form-control">
-    Описание : <input type="text" name="description" class="form-control">
-    Директор института : <input type="text" name="director" class="form-control">
-    Контакты звание института : <input type="text" name="contacts" class="form-control">
-    Фото: <input type="file" name="file">
 
-    <input type="submit" class="btn btn mt-1" value="добавить">
-</form>
-    </div>
+
 
 
 <div th:replace="fragments/footer :: footer"/>

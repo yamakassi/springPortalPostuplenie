@@ -26,16 +26,11 @@ public class User implements UserDetails {
     @Column(name = "email", unique = true)
     private String email;
 
-    @Column(name = "phone_number", unique = true)
-    private String phoneNumber;
+
     private boolean active;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "user")
     private List<Exam> exams = new ArrayList<>();
-
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "image_id")
-    private Image avatar;
 
 
     @OneToOne(cascade = CascadeType.ALL)
@@ -50,23 +45,35 @@ public class User implements UserDetails {
     private Set<Role> roles = new HashSet<>();
     private LocalDateTime dateOfCreated;
     //info user
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "application_id", referencedColumnName = "id")
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Application application;
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Passport passport;
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private CurrentEducation currentEducation;
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Contacts contacts;
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private AddInfo additInfo;
+    private boolean spravka;
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    private List<Image> images = new ArrayList<>();
+    private String departament;
 
     @PrePersist
     private void init() {
         dateOfCreated = LocalDateTime.now();
     }
 
+    public boolean fullCheckInfoField() {
+        if (personalInfo == null && personalInfo.isCheckRequiredFieldsFilled() == false
+                && passport == null && passport.isCheckRequiredFieldsFilled() == false
+                && currentEducation == null && currentEducation.isCheckRequiredFieldsFilled() == false
+                && contacts == null && contacts.isCheckRequiredFieldsFilled() == false
+        ) {
+            return false;
+        } else return true;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -113,5 +120,10 @@ public class User implements UserDetails {
     @Override
     public boolean isEnabled() {
         return active;
+    }
+
+    public void addFiles(Image file) {
+        images.add(file);
+
     }
 }

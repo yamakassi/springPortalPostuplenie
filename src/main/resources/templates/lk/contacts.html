@@ -10,7 +10,7 @@
 
 <div class="wrapper" style="overflow: hidden; height: auto; min-height: 100%;">
     <!-- Left side column. contains the sidebar -->
-    <aside th:replace="fragments/lev-sitebar :: lev-sitebar"/>
+    <aside th:replace="/fragments/lev-sitebar :: lev-sitebar"/>
     <div class="content-wrapper" style="min-height: 368px;">
         <section class="content-header">
             <h1>
@@ -24,15 +24,11 @@
 
             <div class="row">
                 <div class="col-xs-12">
-                    <form id="form" class="form-horizontal" action="Contacts" method="post"
-                          onsubmit="return CheckForm();">
-                        <div class="validation-summary-valid" data-valmsg-summary="true">
-                            <ul>
-                                <li style="display:none"></li>
-                            </ul>
-                        </div>
+                    <form id="form" class="form-horizontal" th:action="@{/lk/Contacts}" method="post"
+                          >
+
                         <input data-val="true" data-val-required="Требуется поле Enabled." id="Enabled" name="Enabled"
-                               type="hidden" value="True">
+                               type="hidden" value="True" required>
                         <div class="form-group">
                             <div class="col-md-3 col-xs-12 control-label">
                                 <label for="MainPhone">Основной телефон</label>
@@ -41,8 +37,8 @@
                             <div class="col-md-8 col-xs-12">
                                 <div class="input-group">
                                     <span class="input-group-addon"><i class="glyphicon glyphicon-phone"></i></span>
-                                    <input class="form-control" id="MainPhone" name="MainPhone" size="25" type="text"
-                                           value="+7(937)145-51-18" placeholder="+,_,(,_,_,_,),_,_,_,-,_,_,-,_,_">
+                                    <input class="form-control" id="MainPhone" name="mainPhoneNumber" size="25" type="text"
+                                           th:attr="value = ${contacts?.mainPhoneNumber}" required>
                                 </div>
                                 <div style="display:none">
                                     <input type="checkbox" id="phone_mask" checked="">
@@ -55,15 +51,15 @@
                         </div>
                         <div class="form-group">
                             <div class="col-md-3 col-xs-12 control-label">
-                                <label for="SecondPhone">Дополнительный</label>
+                                <label for="secondPhone">Дополнительный</label>
                                 <span class="text-danger">*</span>
                             </div>
                             <div class="col-md-8 col-xs-12">
                                 <div class="input-group">
                                     <span class="input-group-addon"><i class="glyphicon glyphicon-phone-alt"></i></span>
-                                    <input class="form-control" id="SecondPhone" name="SecondPhone" size="25"
-                                           type="text" value="+7(927)228-67-64"
-                                           placeholder="+,_,(,_,_,_,),_,_,_,-,_,_,-,_,_">
+                                    <input class="form-control" id="secondPhone" name="SecondPhone" size="25"
+                                           type="text" th:attr="value = ${contacts?.secondPhoneNumber}" required
+                                        >
                                 </div>
                                 <span id="SecondPhone_Message" class="field-validation-valid text-danger"
                                       style="display:none">
@@ -73,14 +69,15 @@
                         </div>
                         <div class="form-group">
                             <div class="col-md-3 col-xs-12 control-label">
-                                <label for="AddEmail">Дополнительный Email</label>
-                                <span class="text-danger">*</span>
+                                <label for="addEmail">Дополнительный Email</label>
+
                             </div>
                             <div class="col-md-8 col-xs-12">
+
                                 <div class="input-group">
                                     <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
-                                    <input class="form-control" id="AddEmail" name="AddEmail" type="email"
-                                           value="ivanaf1@yahoo.com">
+                                    <input class="form-control" id="AddEmail" name="addEmail" type="email"
+                                           th:attr="value = ${contacts?.addEmail}">
                                 </div>
                                 <span id="AddEmail_Message" class="field-validation-valid text-danger"
                                       style="display:none">
@@ -99,9 +96,10 @@
                                 <label for="CountryName">Страна</label>
                                 <span class="text-danger">*</span>
                             </div>
+                            <!--привязать к личным данным  -->
                             <div class="col-md-8 col-xs-12">
                                 <input id="CountryId" name="CountryId" type="hidden" value="193">
-                                <input class="form-control" disabled="disabled" id="CountryName" name="CountryName"
+                                <input class="form-control" disabled="disabled" id="CountryName" name="сountryName"
                                        title="Изменить страну проживания Вы можете на странице &quot;Личные Данные&quot;"
                                        type="text" value="Россия">
                             </div>
@@ -112,7 +110,7 @@
                                 <span class="text-danger">*</span>
                             </div>
                             <div class="col-md-8 col-xs-12">
-                                <select class="form-control select2-hidden-accessible" id="RegionId" name="RegionId"
+                                <select class="form-control select2-hidden-accessible" id="RegionId" name="regionId"
                                         tabindex="-1" aria-hidden="true">
                                     <option value="111">Донецкая Народная Республика</option>
                                     <option value="112">Луганская Народная Республика</option>
@@ -128,7 +126,6 @@
                                     <option value="76">Башкортостан Респ</option>
                                     <option value="44">Белгородская обл</option>
                                     <option value="69">Брянская обл</option>
-                                    <option value="101">Бурятия Респ</option>
                                     <option value="24">Владимирская обл</option>
                                     <option value="45">Волгоградская обл</option>
                                     <option value="28">Вологодская обл</option>
@@ -148,6 +145,7 @@
                                     <option value="82">Карелия Респ</option>
                                     <option value="49">Кемеровская обл</option>
                                     <option value="34">Кировская обл</option>
+                                    <option value="101">Бурятия Респ</option>
                                     <option value="83">Коми Респ</option>
                                     <option value="67">Костромская обл</option>
                                     <option value="26">Краснодарский край</option>
@@ -236,22 +234,22 @@
                                 <span class="text-danger">*</span>
                             </div>
                             <div class="col-md-8 col-xs-12">
-                                <input class="form-control ui-autocomplete-input" id="City" name="City"
-                                       onblur="CheckCity()" onchange="CheckCity()" onkeyup="CheckCity()" type="text"
-                                       value="село Сосновка " autocomplete="off">
-                                <span id="City_Message" class="field-validation-valid text-danger" style="display:none">
+                                <input class="form-control ui-autocomplete-input" id="City" name="city"
+                                        type="text"
+                                       th:attr="value = ${contacts?.city}"  autocomplete="off" >
+
                         Введите город
                     </span>
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="col-md-3 col-xs-12 control-label">
-                                <label for="Street">Улица</label>
+                                <label for="street">Улица</label>
                                 <span class="text-danger">*</span>
                             </div>
                             <div class="col-md-8 col-xs-12">
-                                <input class="form-control" id="Street" name="Street" onblur="CheckStreet()"
-                                       onchange="CheckStreet()" onkeyup="CheckStreet()" type="text" value="Кирова">
+                                <input class="form-control" id="street" name="street"
+                                        type="text" th:attr="value = ${contacts?.street}">
                                 <span id="Street_Message" class="field-validation-valid text-danger"
                                       style="display:none">
                         Введите улицу
@@ -264,605 +262,55 @@
                                 <span class="text-danger">*</span>
                             </div>
                             <div class="col-md-3 col-xs-12">
-                                <input class="form-control" id="House" name="House" onblur="CheckHouse()"
-                                       onchange="CheckHouse()" onkeyup="CheckHouse()" type="text" value="29">
+                                <input class="form-control" id="House" name="house"  type="text" th:attr="value = ${contacts?.house }">
                                 <span id="House_Message" class="field-validation-valid text-danger"
                                       style="display:none">
                         Введите дом
                     </span>
                             </div>
                             <div class="col-md-2 col-xs-12 control-label">
-                                <label for="Flat">Квартира</label>
-                                <span class="text-danger">*</span>
+                                <label for="flat">Квартира</label>
+
                             </div>
                             <div class="col-md-3 col-xs-12">
-                                <input class="form-control" id="Flat" name="Flat" onblur="CheckFlat()"
-                                       onchange="CheckFlat()" onkeyup="CheckFlat()" type="text" value="-">
+                                <input class="form-control" id="flat" name="flat"  type="number" th:attr="value = ${contacts?.flat }">
                                 <span id="Flat_Message" class="field-validation-valid text-danger"
                                       style="display:none"></span>
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="col-md-3 col-xs-12 control-label">
-                                <label for="PostIndex">Индекс</label>
+                                <label for="postIndex">Индекс</label>
                                 <span class="text-danger">*</span>
                             </div>
                             <div class="col-md-8 col-xs-12">
-                                <input class="form-control" id="PostIndex" name="PostIndex" type="text" value="413072">
+                                <input class="form-control" id="postIndex" name="postIndex" type="text" th:attr="value = ${contacts?.postIndex }" required>
                                 <span id="PostIndex_Message" class="field-validation-valid text-danger"
                                       style="display:none">
                         Введите индекс
                     </span>
-                                <span id="PostIndex_MessageFoundOtherIndex" class="field-validation-valid text-danger"
-                                      style="display:none; cursor:pointer;" onclick="AdjustFoundPostIndex();">
-                        Найден другой почтовый индекс. Кликните для изменения
-                    </span>
                             </div>
                         </div>
 
-                        <div class="form-group">
-                            <div class="col-md-offset-3 col-md-8 col-xs-12">
-                                <label>
-                                    <input data-val="true" data-val-required="Требуется поле HasAddressReal."
-                                           id="HasAddressReal" name="HasAddressReal" onchange="AdjustAddressReal()"
-                                           onclick="AdjustAddressReal()" type="checkbox" value="true"><input
-                                        name="HasAddressReal" type="hidden" value="false">
-                                    Проживаю по другому адресу
-                                </label>
-                            </div>
-                        </div>
-                        <div id="AddressReal" style="display:none">
-                            <div class="row">
-                                <div class="col-md-offset-3 col-md-8 col-xs-12">
-                                    <h4>Адрес проживания/почтовый адрес (если отличается):</h4>
-                                </div>
-                            </div>
-                            <div class="form-group" id="CountryReal">
-                                <div class="col-md-3 col-xs-12 control-label">
-                                    <label for="CountryRealId">Страна</label>
-                                    <span class="text-danger">*</span>
-                                </div>
-                                <div class="col-md-8 col-xs-12">
-                                    <select class="form-control select2-hidden-accessible" id="CountryRealId"
-                                            name="CountryRealId" tabindex="-1" aria-hidden="true">
-                                        <option selected="selected" value="193">Россия</option>
-                                        <option value="236">Украина</option>
-                                        <option value="23">Беларусь</option>
-                                        <option value="125">Казахстан</option>
-                                        <option value="133">Латвия</option>
-                                        <option value="75">Эстония</option>
-                                        <option value="139">Литва</option>
-                                        <option value="131">Кыргызстан</option>
-                                        <option value="233">Туркменистан</option>
-                                        <option value="241">Узбекистан</option>
-                                        <option value="17">Азербайджан</option>
-                                        <option value="89">Грузия</option>
-                                        <option value="156">Молдавия</option>
-                                        <option value="12">Армения</option>
-                                        <option value="225">Таджикистан</option>
-                                        <option value="252">Лицо без гражданства</option>
-                                        <option value="253">Черногория</option>
-                                        <option value="254">Абхазия</option>
-                                        <option value="255">Южная Осетия</option>
-                                        <option value="256">Палестина</option>
-                                        <option value="257">Донецкая Народная Республика</option>
-                                        <option value="258">Луганская Народная Республика</option>
-                                        <option value="242">Вануату</option>
-                                        <option value="243">Ватикан</option>
-                                        <option value="244">Венесуэлла</option>
-                                        <option value="245">Вьетнам</option>
-                                        <option value="246">Западная Сахара</option>
-                                        <option value="247">Уэльс</option>
-                                        <option value="248">Йемен</option>
-                                        <option value="249">Заир</option>
-                                        <option value="250">Замбия</option>
-                                        <option value="251">Зимбабве</option>
-                                        <option value="226">Танзания</option>
-                                        <option value="227">Таиланд</option>
-                                        <option value="228">Того</option>
-                                        <option value="229">Тонга</option>
-                                        <option value="230">Тринидад и Тобаго</option>
-                                        <option value="231">Тунис</option>
-                                        <option value="232">Турция</option>
-                                        <option value="234">Тувалу</option>
-                                        <option value="235">Уганда</option>
-                                        <option value="132">Лаос</option>
-                                        <option value="237">ОАЭ</option>
-                                        <option value="238">Соединённое Королевство</option>
-                                        <option value="239">США</option>
-                                        <option value="240">Уругвай</option>
-                                        <option value="140">Люксембург</option>
-                                        <option value="141">Макао</option>
-                                        <option value="142">Македония</option>
-                                        <option value="143">Мадагаскар</option>
-                                        <option value="144">Малави</option>
-                                        <option value="145">Малайзия</option>
-                                        <option value="146">Мальдивы</option>
-                                        <option value="147">Мали</option>
-                                        <option value="148">Мальта</option>
-                                        <option value="149">Маршалловы Острова</option>
-                                        <option value="150">Мартиника</option>
-                                        <option value="151">Мавритания</option>
-                                        <option value="152">Маврикий</option>
-                                        <option value="153">Майотта</option>
-                                        <option value="154">Мексика</option>
-                                        <option value="155">Федеративные Штаты Микронезии</option>
-                                        <option value="194">Руанда</option>
-                                        <option value="195">Остров Святой Елены</option>
-                                        <option value="196">Сент-Китс и Невис</option>
-                                        <option value="197">Сент-Люсия</option>
-                                        <option value="198">Сен-Пьер и Микелон</option>
-                                        <option value="199">Сент-Винсент и Гренадины</option>
-                                        <option value="200">Самоа</option>
-                                        <option value="201">Сан-Марино</option>
-                                        <option value="202">Сан-Томе и Принсипи</option>
-                                        <option value="203">Саудовская Аравия</option>
-                                        <option value="204">Шотландия</option>
-                                        <option value="205">Сенегал</option>
-                                        <option value="206">Сербия</option>
-                                        <option value="207">Сейшельские острова</option>
-                                        <option value="208">Сьерра-Леоне</option>
-                                        <option value="209">Сингапур</option>
-                                        <option value="210">Словакия</option>
-                                        <option value="211">Словения</option>
-                                        <option value="212">Соломоновы острова</option>
-                                        <option value="213">Сомали</option>
-                                        <option value="214">ЮАР</option>
-                                        <option value="215">Испания</option>
-                                        <option value="216">Шри-Ланка</option>
-                                        <option value="217">Судан</option>
-                                        <option value="218">Южный Судан</option>
-                                        <option value="219">Суринам</option>
-                                        <option value="220">Свазиленд</option>
-                                        <option value="221">Швеция</option>
-                                        <option value="222">Швейцария</option>
-                                        <option value="223">Сирия</option>
-                                        <option value="224">Тайвань (Китай)</option>
-                                        <option value="13">Аруба</option>
-                                        <option value="14">Острова Ашмор и Картье</option>
-                                        <option value="15">Австралия</option>
-                                        <option value="16">Австрия</option>
-                                        <option value="18">Багамы</option>
-                                        <option value="19">Бахрейн</option>
-                                        <option value="20">Бангладеш</option>
-                                        <option value="21">Барбадос</option>
-                                        <option value="22">Бассас-да-Индия</option>
-                                        <option value="1">Афганистан</option>
-                                        <option value="2">Акротири</option>
-                                        <option value="3">Албания</option>
-                                        <option value="4">Алжир</option>
-                                        <option value="5">Американское Самоа</option>
-                                        <option value="6">Андорра</option>
-                                        <option value="7">Ангола</option>
-                                        <option value="8">Ангилья</option>
-                                        <option value="10">Антигуа и Барбуда</option>
-                                        <option value="11">Аргентина</option>
-                                        <option value="76">Эфиопия</option>
-                                        <option value="77">Остров Европа</option>
-                                        <option value="78">Фолклендские о-ва</option>
-                                        <option value="79">Фарерские острова</option>
-                                        <option value="80">Фиджи</option>
-                                        <option value="81">Финляндия</option>
-                                        <option value="82">Франция</option>
-                                        <option value="83">Французская Гвиана</option>
-                                        <option value="84">Французская Полинезия</option>
-                                        <option value="85">Французские Южные и Антарктические территории</option>
-                                        <option value="86">Габон</option>
-                                        <option value="87">Гамбия</option>
-                                        <option value="88">Сектор Газа</option>
-                                        <option value="134">Ливан</option>
-                                        <option value="135">Лесото</option>
-                                        <option value="136">Либерия</option>
-                                        <option value="137">Ливия</option>
-                                        <option value="138">Лихтенштейн</option>
-                                        <option value="126">Кения</option>
-                                        <option value="127">Кирибати</option>
-                                        <option value="128">КНДР</option>
-                                        <option value="129">Южная Корея</option>
-                                        <option value="130">Кувейт</option>
-                                        <option value="157">Монако</option>
-                                        <option value="158">Монголия</option>
-                                        <option value="159">Монтсеррат</option>
-                                        <option value="160">Марокко</option>
-                                        <option value="161">Мозамбик</option>
-                                        <option value="162">Намибия</option>
-                                        <option value="163">Науру</option>
-                                        <option value="164">Навасса</option>
-                                        <option value="165">Непал</option>
-                                        <option value="166">Нидерланды</option>
-                                        <option value="167">Нидерландские Антильские острова</option>
-                                        <option value="168">Новая Каледония</option>
-                                        <option value="169">Новая Зеландия</option>
-                                        <option value="170">Никарагуа</option>
-                                        <option value="171">Нигер</option>
-                                        <option value="172">Нигерия</option>
-                                        <option value="173">Ниуэ</option>
-                                        <option value="174">Норфолк</option>
-                                        <option value="175">Северные Марианские острова</option>
-                                        <option value="176">Норвегия</option>
-                                        <option value="177">Оман</option>
-                                        <option value="178">Пакистан</option>
-                                        <option value="179">Палау</option>
-                                        <option value="180">Панама</option>
-                                        <option value="181">Папуа-Новая Гвинея</option>
-                                        <option value="182">Парасельские острова</option>
-                                        <option value="183">Парагвай</option>
-                                        <option value="184">Перу</option>
-                                        <option value="185">Филиппины</option>
-                                        <option value="186">Острова Питкэрн</option>
-                                        <option value="187">Польша</option>
-                                        <option value="188">Португалия</option>
-                                        <option value="189">Пуэрто-Рико</option>
-                                        <option value="190">Катар</option>
-                                        <option value="191">Реньюон</option>
-                                        <option value="192">Румыния</option>
-                                        <option value="90">Германия</option>
-                                        <option value="91">Гана</option>
-                                        <option value="92">Гибралтар</option>
-                                        <option value="93">Глорьёз</option>
-                                        <option value="94">Греция</option>
-                                        <option value="95">Гренландия</option>
-                                        <option value="96">Гренада</option>
-                                        <option value="97">Гваделупе</option>
-                                        <option value="98">Гуам</option>
-                                        <option value="99">Гватемала</option>
-                                        <option value="100">Гернси</option>
-                                        <option value="101">Гвинея</option>
-                                        <option value="102">Гвинея-Бисау</option>
-                                        <option value="103">Гайана</option>
-                                        <option value="104">Гаити</option>
-                                        <option value="105">Остров Херд и острова Макдональд</option>
-                                        <option value="106">Ватикан</option>
-                                        <option value="107">Гондурас</option>
-                                        <option value="108">Гонконг (Китай)</option>
-                                        <option value="109">Венгрия</option>
-                                        <option value="110">Исландия</option>
-                                        <option value="111">Индия</option>
-                                        <option value="112">Индонезия</option>
-                                        <option value="113">Иран</option>
-                                        <option value="114">Ирак</option>
-                                        <option value="115">Ирландия</option>
-                                        <option value="116">Остров Мэн</option>
-                                        <option value="117">Израиль</option>
-                                        <option value="118">Италия</option>
-                                        <option value="119">Ямайка</option>
-                                        <option value="120">Ян-Майен</option>
-                                        <option value="121">Япония</option>
-                                        <option value="122">Джерси</option>
-                                        <option value="123">Иордания</option>
-                                        <option value="124">Жуан-ди-Нова</option>
-                                        <option value="24">Бельгия</option>
-                                        <option value="25">Белиз</option>
-                                        <option value="26">Бенин</option>
-                                        <option value="27">Бермудские Острова</option>
-                                        <option value="28">Бутан</option>
-                                        <option value="29">Боливия</option>
-                                        <option value="30">Босния и Герцеговина</option>
-                                        <option value="31">Ботсвана</option>
-                                        <option value="32">Остров Буве</option>
-                                        <option value="33">Бразилия</option>
-                                        <option value="34">Британская территория в Индийском океане</option>
-                                        <option value="35">Британские Виргинские острова</option>
-                                        <option value="36">Бруней</option>
-                                        <option value="37">Болгария</option>
-                                        <option value="38">Буркина-Фасо</option>
-                                        <option value="39">Мьянма (Бирма)</option>
-                                        <option value="40">Бурунди</option>
-                                        <option value="41">Камбоджа</option>
-                                        <option value="42">Камерун</option>
-                                        <option value="43">Канада</option>
-                                        <option value="44">Кабо-Верде</option>
-                                        <option value="45">Каймановы острова</option>
-                                        <option value="46">Центральноафриканская Республика</option>
-                                        <option value="47">Чад</option>
-                                        <option value="48">Чили</option>
-                                        <option value="49">КНР</option>
-                                        <option value="50">Остров Рождества</option>
-                                        <option value="51">Клиппертон</option>
-                                        <option value="52">Кокосовые острова</option>
-                                        <option value="53">Колумбия</option>
-                                        <option value="54">Коморские Острова</option>
-                                        <option value="55">Демократическая Республика Конго</option>
-                                        <option value="56">Республика Конго</option>
-                                        <option value="57">Острова Кука</option>
-                                        <option value="58">Территория островов Кораллового моря</option>
-                                        <option value="59">Коста-Рика</option>
-                                        <option value="60">Кот-д'Ивуар</option>
-                                        <option value="61">Хорватия</option>
-                                        <option value="62">Куба</option>
-                                        <option value="63">Кипр</option>
-                                        <option value="64">Чехия</option>
-                                        <option value="65">Дания</option>
-                                        <option value="66">Декелия</option>
-                                        <option value="67">Джибути</option>
-                                        <option value="68">Доминика</option>
-                                        <option value="69">Доминиканская Республика</option>
-                                        <option value="70">Эквадор</option>
-                                        <option value="71">Египет</option>
-                                        <option value="72">Сальвадор</option>
-                                        <option value="73">Экваториальная Гвинея</option>
-                                        <option value="74">Эритрея</option>
-                                    </select><span class="select2 select2-container select2-container--default"
-                                                   dir="ltr" style="width: 100%;"><span class="selection"><span
-                                        class="select2-selection select2-selection--single" role="combobox"
-                                        aria-haspopup="true" aria-expanded="false" tabindex="0"
-                                        aria-labelledby="select2-CountryRealId-container"><span
-                                        class="select2-selection__rendered" id="select2-CountryRealId-container"
-                                        title="Россия">Россия</span><span class="select2-selection__arrow"
-                                                                          role="presentation"><b
-                                        role="presentation"></b></span></span></span><span class="dropdown-wrapper"
-                                                                                           aria-hidden="true"></span></span>
-                                </div>
-                            </div>
-                            <div class="form-group" id="RegionReal">
-                                <div class="col-md-3 col-xs-12 control-label">
-                                    <label for="RegionRealId">Регион</label>
-                                    <span class="text-danger">*</span>
-                                </div>
-                                <div class="col-md-8 col-xs-12">
-                                    <select class="form-control select2-hidden-accessible" id="RegionRealId"
-                                            name="RegionRealId" tabindex="-1" aria-hidden="true">
-                                        <option value="111">Донецкая Народная Республика</option>
-                                        <option value="112">Луганская Народная Республика</option>
-                                        <option selected="selected" value="1">Санкт-Петербург</option>
-                                        <option value="2">Лен. Область</option>
-                                        <option value="75">Адыгея Респ</option>
-                                        <option value="77">Алтай Респ</option>
-                                        <option value="41">Алтайский край</option>
-                                        <option value="70">Амурская обл</option>
-                                        <option value="29">Архангельская обл</option>
-                                        <option value="22">Астраханская обл</option>
-                                        <option value="20">Байконур</option>
-                                        <option value="76">Башкортостан Респ</option>
-                                        <option value="44">Белгородская обл</option>
-                                        <option value="69">Брянская обл</option>
-                                        <option value="101">Бурятия Респ</option>
-                                        <option value="24">Владимирская обл</option>
-                                        <option value="45">Волгоградская обл</option>
-                                        <option value="28">Вологодская обл</option>
-                                        <option value="64">Воронежская обл</option>
-                                        <option value="78">Дагестан Респ</option>
-                                        <option value="107">Еврейская АО</option>
-                                        <option value="108">Забайкальский край</option>
-                                        <option value="46">Ивановская обл</option>
-                                        <option value="79">Ингушская Респ</option>
-                                        <option value="35">Иркутская обл</option>
-                                        <option value="100">Кабардино-Балкарская Респ</option>
-                                        <option value="47">Калининградская обл</option>
-                                        <option value="80">Калмыкия Респ</option>
-                                        <option value="48">Калужская обл</option>
-                                        <option value="74">Камчатская обл</option>
-                                        <option value="81">Карачаево-Черкесская Респ</option>
-                                        <option value="82">Карелия Респ</option>
-                                        <option value="49">Кемеровская обл</option>
-                                        <option value="34">Кировская обл</option>
-                                        <option value="83">Коми Респ</option>
-                                        <option value="67">Костромская обл</option>
-                                        <option value="26">Краснодарский край</option>
-                                        <option value="23">Красноярский край</option>
-                                        <option value="109">Крым</option>
-                                        <option value="50">Курганская обл</option>
-                                        <option value="51">Курская обл</option>
-                                        <option value="36">Липецкая обл</option>
-                                        <option value="52">Магаданская обл</option>
-                                        <option value="98">Марий Эл Респ</option>
-                                        <option value="97">Мордовия Респ</option>
-                                        <option value="19">Москва</option>
-                                        <option value="38">Московская обл</option>
-                                        <option value="21">Мурманская обл</option>
-                                        <option value="91">Ненецкий АО</option>
-                                        <option value="39">Нижегородская обл</option>
-                                        <option value="53">Новгородская обл</option>
-                                        <option value="27">Новосибирская обл</option>
-                                        <option value="68">Омская обл</option>
-                                        <option value="54">Оренбургская обл</option>
-                                        <option value="55">Орловская обл</option>
-                                        <option value="25">Пензенская обл</option>
-                                        <option value="106">Пермский край</option>
-                                        <option value="30">Приморский край</option>
-                                        <option value="65">Псковская обл</option>
-                                        <option value="3">Россия</option>
-                                        <option value="31">Ростовская обл</option>
-                                        <option value="37">Рязанская обл</option>
-                                        <option value="72">Самарская обл</option>
-                                        <option value="56">Саратовская обл</option>
-                                        <option value="84">Саха (Якутия) Респ</option>
-                                        <option value="57">Сахалинская обл</option>
-                                        <option value="58">Свердловская обл</option>
-                                        <option value="110">Севастополь</option>
-                                        <option value="85">Северная Осетия Респ</option>
-                                        <option value="40">Смоленская обл</option>
-                                        <option value="42">Ставропольский край</option>
-                                        <option value="59">Тамбовская обл</option>
-                                        <option value="102">Татарстан Респ</option>
-                                        <option value="73">Тверская обл</option>
-                                        <option value="60">Томская обл</option>
-                                        <option value="66">Тульская обл</option>
-                                        <option value="86">Тыва Респ</option>
-                                        <option value="61">Тюменская обл</option>
-                                        <option value="105">Удмуртская Респ</option>
-                                        <option value="32">Ульяновская обл</option>
-                                        <option value="43">Хабаровский край</option>
-                                        <option value="104">Хакасия Респ</option>
-                                        <option value="94">Ханты-Мансийский АО</option>
-                                        <option value="33">Челябинская обл</option>
-                                        <option value="87">Чеченская Респ</option>
-                                        <option value="103">Чувашская Респ</option>
-                                        <option value="95">Чукотский АО</option>
-                                        <option value="99">Ямало-Ненецкий АО</option>
-                                        <option value="62">Ярославская обл</option>
-                                        <option value="18">Азербайджан</option>
-                                        <option value="17">Армения</option>
-                                        <option value="9">Белоруссия</option>
-                                        <option value="16">Грузия</option>
-                                        <option value="11">Казахстан</option>
-                                        <option value="12">Киргизия</option>
-                                        <option value="15">Таджикистан</option>
-                                        <option value="14">Туркменистан</option>
-                                        <option value="13">Узбекистан</option>
-                                        <option value="10">Украина</option>
-                                        <option value="5">Латвия</option>
-                                        <option value="6">Литва</option>
-                                        <option value="7">Молдова</option>
-                                        <option value="4">Эстония</option>
-                                        <option value="8">Далн. зарубеж.</option>
-                                    </select><span class="select2 select2-container select2-container--default"
-                                                   dir="ltr" style="width: 100%;"><span class="selection"><span
-                                        class="select2-selection select2-selection--single" role="combobox"
-                                        aria-haspopup="true" aria-expanded="false" tabindex="0"
-                                        aria-labelledby="select2-RegionRealId-container"><span
-                                        class="select2-selection__rendered" id="select2-RegionRealId-container"
-                                        title="Санкт-Петербург">Санкт-Петербург</span><span
-                                        class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span
-                                        class="dropdown-wrapper" aria-hidden="true"></span></span>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-md-3 col-xs-12 control-label">
-                                    <label for="CityReal">Город</label>
-                                    <span class="text-danger">*</span>
-                                </div>
-                                <div class="col-md-8 col-xs-12">
-                                    <input class="form-control ui-autocomplete-input" id="CityReal" name="CityReal"
-                                           onblur="CheckCityReal()" onchange="CheckCityReal()" onkeyup="CheckCityReal()"
-                                           type="text" value="" autocomplete="off">
-                                    <span id="CityReal_Message" class="field-validation-valid text-danger"
-                                          style="display:none"></span>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-md-3 col-xs-12 control-label">
-                                    <label for="StreetReal">Улица</label>
-                                    <span class="text-danger">*</span>
-                                </div>
-                                <div class="col-md-8 col-xs-12">
-                                    <input class="form-control" id="StreetReal" name="StreetReal"
-                                           onblur="CheckStreetReal()" onchange="CheckStreetReal()"
-                                           onkeyup="CheckStreetReal()" type="text" value="">
-                                    <span id="StreetReal_Message" class="field-validation-valid text-danger"
-                                          style="display:none"></span>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-md-3 col-xs-12 control-label">
-                                    <label for="HouseReal">Дом</label>
-                                    <span class="text-danger">*</span>
-                                </div>
-                                <div class="col-md-3 col-xs-12">
-                                    <input class="form-control" id="HouseReal" name="HouseReal"
-                                           onblur="CheckHouseReal()" onchange="CheckHouseReal()"
-                                           onkeyup="CheckHouseReal()" type="text" value="">
-                                    <span id="HouseReal_Message" class="field-validation-valid text-danger"
-                                          style="display:none"></span>
-                                </div>
 
-                                <div class="col-md-2 col-xs-12 control-label">
-                                    <label for="FlatReal">Квартира</label>
-                                    <span class="text-danger">*</span>
-                                </div>
-                                <div class="col-md-3 col-xs-12">
-                                    <input class="form-control" id="FlatReal" name="FlatReal" type="text" value="">
-                                    <span id="FlatReal_Message" class="field-validation-valid text-danger"
-                                          style="display:none"></span>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-md-3 col-xs-12 control-label">
-                                    <label for="PostIndexReal">Индекс</label>
-                                    <span class="text-danger">*</span>
-                                </div>
-                                <div class="col-md-8 col-xs-12">
-                                    <input class="form-control" id="PostIndexReal" name="PostIndexReal" type="text"
-                                           value="">
-                                    <span id="PostIndexReal_MessageFoundOtherIndex"
-                                          class="field-validation-valid text-danger"
-                                          style="display:none; cursor:pointer;" onclick="AdjustFoundPostIndexReal();">
-                            Найден другой почтовый индекс. Кликните для изменения
-                        </span>
-                                </div>
-                            </div>
-                        </div>
+
 
                         <div class="form-group">
                             <div class="col-md-offset-3 col-md-8 col-xs-12">
                                 <h4>Общежитие</h4>
                                 <label style="display:none;">
                                     <input data-val="true" data-val-required="Требуется поле HostelAbit."
-                                           id="HostelAbit" name="HostelAbit" type="checkbox" value="true"><input
-                                        name="HostelAbit" type="hidden" value="false">
+                                           id="HostelAbit" name="hostelAbit" type="checkbox" th:checked="${contacts?.hostelAbit}">
                                     Нуждаюсь в общежитии на время поступления
                                 </label>
                                 <br>
-                                <label>
-                                    <input checked="checked" data-val="true"
-                                           data-val-required="Требуется поле HostelEduc." id="HostelEduc"
-                                           name="HostelEduc" onclick="UpdateAfterHostelEduc()" type="checkbox"
-                                           value="true"><input name="HostelEduc" type="hidden" value="false">
-                                    Нуждаюсь в общежитии на время обучения
-                                </label>
 
-                                <div id="HostelEducType" style="">
-                                    <div class="radio">
-                                        <label>
-                                            <input type="radio" name="HostelEducTypeId" value="1"
-                                                   checked="&quot;checked&quot;">
-                                            Нуждаюсь в поселении в общежитие СПбГУ до 1 сентября
-                                        </label>
-                                    </div>
-                                    <div class="radio">
-                                        <label>
-                                            <input type="radio" name="HostelEducTypeId" value="2">
-                                            Место в общежитии СПбГУ может потребоваться в процессе обучения, после 1
-                                            сентября
-                                        </label>
-                                    </div>
-                                </div>
+
+
                             </div>
                         </div>
 
-                        <div class="form-group">
-                            <div class="col-md-offset-3 col-md-8 col-xs-12">
-                                <h4>Лицо, с которым можно связаться в экстренных случаях: <span
-                                        class="text-danger">*</span></h4>
-                                <span>(указать Ф.И.О., степень родства, телефон, моб.телефон, эл.почта)</span><br>
 
-                                <textarea class="form-control noresize" cols="85" id="ContactPerson"
-                                          name="ContactPerson" onblur="CheckContactPerson()"
-                                          onchange="CheckContactPerson()" onkeyup="CheckContactPerson()" rows="5">Афанасьева Полина Владимировна, мать, +79271294835</textarea>
-                                <span id="ContactPerson_Message" class="field-validation-valid text-danger"
-                                      style="display:none">
-                    </span>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-md-offset-3 col-md-8 col-xs-12"><span class="Red">*</span> - Необходимое
-                                поле
-                            </div>
-                        </div>
-                        <div class="form-group" style="display:none;">
-                            <div class="col-md-offset-3 col-md-8 col-xs-12">
-                                <h4>
-                                    Способ возврата поданных документов
-                                    <i id="DocumentsReturnHint" class="fa fa-question-circle" data-toggle="popover"
-                                       data-placement="bottom"
-                                       data-content="Возврат осуществляется в части оригиналов документов"
-                                       data-original-title="" title=""></i>
-                                </h4>
-                                <div class="radio">
-                                    <label>
-                                        <input type="radio" name="ReturnDocumentTypeId" value="1"
-                                               checked="&quot;checked&quot;">
-                                        Лично или доверенному лицу
-                                    </label>
-                                </div>
-                                <div class="radio">
-                                    <label>
-                                        <input type="radio" name="ReturnDocumentTypeId" value="2">
-                                        Путём направления документов через операторов почтовой связи общего пользования
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
 
                         <div class="form-group">
                             <div class="col-md-offset-9 col-md-2 col-xs-offset-6 col-xs-6">
@@ -872,6 +320,8 @@
                                 </button>
                             </div>
                         </div>
+
+
                     </form>
                 </div>
             </div>

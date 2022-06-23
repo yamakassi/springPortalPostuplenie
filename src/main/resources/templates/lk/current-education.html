@@ -48,37 +48,15 @@
                                             id="typeSchool"
                                             name="typeSchool"
                                              tabindex="-1" aria-hidden="true"
-                                            >
-                                       <option  value="school">Школа</option>
-                                         <option value="university">ВУЗ</option>
-                                        <option value="college">СПО</option>
+                                            required>
+                                       <option  th:selected="${currentEducation?.typeSchool=='school'}" value="school">Школа</option>
+                                        <option th:selected="${currentEducation?.typeSchool=='university'}" value="university">ВУЗ</option>
+                                        <option th:selected="${currentEducation?.typeSchool=='college'}" value="college">СПО</option>
 
                                     </select>
                                 </div>
                             </div>
-                            <div  class="form-group" style="">
-                                <div class="col-md-3 col-xs-12 control-label">
-                                    <label for="schoolExitClassId" title="Необходимое поле ">
-                                        Оконченный класс
-                                        <span class="text-danger">*</span>
-                                    </label>
-                                </div>
-                                <div class="col-md-8 col-xs-12">
-                                    <select class="form-control select2-hidden-accessible"
-                                            id="schoolExitClassId"
-                                            name="schoolExitClass"
-                                            tabindex="-1" aria-hidden="true"
 
-                                    >
-                                        <option value="12">12 класс</option>
-                                        <option  value="11">11 класс</option>
-                                        <option value="10">10 класс</option>
-                                        <option value="9">9 класс</option>
-                                        <option value="8">8 класс</option>
-                                        <option value="7">7 класс</option>
-                                    </select>
-                                </div>
-                            </div>
                             <div id="_schoolName" class="form-group">
                                 <div class="col-md-3 col-xs-12 control-label">
                                     <label for="schoolName" title="Необходимое поле ">
@@ -91,11 +69,9 @@
                                            id="schoolName"
                                            name="schoolName"
                                            type="text"
-                                           th:attr="value = ${currentEducation?.schoolName}" autocomplete="off">
-                                    <span id=schoolName_Message"
-                                          class="field-validation-valid text-danger" style="display:none">
-                            Укажите название образовательного учреждения
-                        </span>
+                                           th:attr="value = ${currentEducation?.schoolName}"
+                                           required>
+
                                 </div>
                             </div>
                             <div id="countryEduc" class="form-group">
@@ -109,18 +85,19 @@
                                     <select class="form-control select2-hidden-accessible"
                                             id="countryEducId"
                                             name="countryEducId"
-                                             tabindex="-1" aria-hidden="true">
-                                        <option selected="selected" value="193">Россия</option>
-                                        <option value="236">Украина</option>
-                                        <option value="23">Беларусь</option>
-                                        <option value="125">Казахстан</option>
-                                        <option value="131">Кыргызстан</option>
-                                        <option value="233">Туркменистан</option>
-                                        <option value="89">Грузия</option>
-                                        <option value="156">Молдавия</option>
-                                        <option value="12">Армения</option>
+                                             tabindex="-1" aria-hidden="true" required>
+                                        <option  th:selected="${currentEducation?.countryEducId==193}" value="193">Россия</option>
+                                        <option th:selected="${currentEducation?.countryEducId==236}" value="236">Украина</option>
+                                        <option th:selected="${currentEducation?.countryEducId==23}" value="23">Беларусь</option>
+                                        <option th:selected="${currentEducation?.countryEducId==125}" value="125">Казахстан</option>
+                                        <option th:selected="${currentEducation?.countryEducId==131}" value="131">Кыргызстан</option>
+                                        <option th:selected="${currentEducation?.countryEducId==233}" value="233">Туркменистан</option>
+                                        <option th:selected="${currentEducation?.countryEducId==89}"value="89">Грузия</option>
+                                        <option th:selected="${currentEducation?.countryEducId==156}" value="156">Молдавия</option>
+                                        <option th:selected="${currentEducation?.countryEducId==12}"value="12">Армения</option>
 
-                                        <option value="252">Лицо без гражданства</option>
+                                        <option th:selected="${currentEducation?.countryEducId==225}" value="252">Лицо без гражданства</option>
+
                                     </select></div>
                             </div>
                             <div id="regionEduc" class="form-group">
@@ -134,18 +111,19 @@
                                     <select class="form-control select2-hidden-accessible"
                                             id="regionEducId"
                                             name="regionEducId"
-                                            tabindex="-1" aria-hidden="true">
-                                        <option selected="selected" value="193">Россия</option>
-                                        <option value="236">Украина</option>
-                                        <option value="23">Беларусь</option>
-                                        <option value="125">Казахстан</option>
-                                        <option value="131">Кыргызстан</option>
-                                        <option value="233">Туркменистан</option>
-                                        <option value="89">Грузия</option>
-                                        <option value="156">Молдавия</option>
-                                        <option value="12">Армения</option>
+                                            tabindex="-1" aria-hidden="true" required>
+                                        <option  th:selected="${currentEducation?.regionEducId==193}" value="193">Россия</option>
+                                        <option th:selected="${currentEducation?.regionEducId==236}" value="236">Украина</option>
+                                        <option th:selected="${currentEducation?.regionEducId==23}" value="23">Беларусь</option>
+                                        <option th:selected="${currentEducation?.regionEducId==125}" value="125">Казахстан</option>
+                                        <option th:selected="${currentEducation?.regionEducId==131}" value="131">Кыргызстан</option>
+                                        <option th:selected="${currentEducation?.regionEducId==233}" value="233">Туркменистан</option>
+                                        <option th:selected="${currentEducation?.regionEducId==89}"value="89">Грузия</option>
+                                        <option th:selected="${currentEducation?.regionEducId==156}" value="156">Молдавия</option>
+                                        <option th:selected="${currentEducation?.regionEducId==12}"value="12">Армения</option>
 
-                                        <option value="252">Лицо без гражданства</option>
+                                        <option th:selected="${currentEducation?.regionEducId==225}" value="252">Лицо без гражданства</option>
+
                                     </select> </div>
                             </div>
                             <div id="_SchoolCity" class="form-group">
@@ -156,7 +134,8 @@
                                     <input class="form-control ui-autocomplete-input"
                                            id="schoolCity"
                                            name="schoolCity"
-                                           type="text" th:attr="value = ${currentEducation?.schoolCity}" >
+                                           type="text" th:attr="value = ${currentEducation?.schoolCity}"
+                                           required>
 
                                 </div>
                             </div>
@@ -172,7 +151,8 @@
                                     <div class="col-md-8 col-xs-12">
                                         <input class="form-control" id="schoolExitYear"
                                                name="schoolExitYear"
-                                               type="text" th:attr="value = ${currentEducation?.schoolExitYear}">
+                                               type="text" th:attr="value = ${currentEducation?.schoolExitYear}"
+                                               required>
 
                                     </div>
                                 </div>
@@ -189,7 +169,8 @@
                                     <div class="col-md-8 col-xs-12">
                                         <input class="form-control" id="series" maxlength="20"
                                                name="series"
-                                              type="text" th:attr="value = ${currentEducation?.series}">
+                                              type="text" th:attr="value = ${currentEducation?.series}"
+                                               required>
 
                                     </div>
                                 </div>
@@ -213,7 +194,8 @@
                                     </div>
                                     <div class="col-md-8 col-xs-12">
                                         <input class="form-control" id="avgMark"
-                                               name="avgMark" type="text" th:attr="value = ${currentEducation?.avgMark}">
+                                               name="avgMark" type="text" th:attr="value = ${currentEducation?.avgMark}"
+                                               required>
                                     </div>
                                 </div>
                                 <div id="_isExcellent" class="form-group">
@@ -223,7 +205,7 @@
                                                    id="isExcellent"
                                                    name="isExcellent" type="checkbox"
                                                    value="true"><input name="isExcellent"
-                                                                       type="hidden" value="false">
+                                                                       type="hidden" value="false" required>
                                             Медалист (красный диплом)
                                         </label>
                                     </div>

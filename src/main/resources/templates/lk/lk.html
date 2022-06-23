@@ -28,7 +28,7 @@
                 <div class="col-xs-12">
                     <ul class="timeline">
                         <!-- Person -->
-                        <li>
+                        <li th:if="${!user.fullCheckInfoField()}">
                             <!-- timeline icon -->
                             <i class="fa fa-warning bg-red"></i>
                             <div class="timeline-item">
@@ -45,11 +45,11 @@
                         </li>
 
                         <!-- Application -->
-                        <li>
+                        <li >
                             <!-- timeline icon -->
                             <i class="fa fa-warning bg-red"></i>
                             <div class="timeline-item">
-                                <h3 class="timeline-header">Подайте заявление</h3>
+                                <h3 class="timeline-header" >Подайте заявление</h3>
                                 <div class="timeline-body">
                                     В заявлении укажите все образовательные программы, формы и основы обучения, в
                                     конкурсе на которые Вы желаете принимать участие.<br>

@@ -25,7 +25,7 @@
             <div class="row">
                 <div class="col-md-11 col-xs-12">
 
-                    <form class="form-horizontal" action="AddInfo" method="post">
+                    <form class="form-horizontal" action="lk/AddInfo" method="post">
 
 
                         <div class="form-group">
@@ -43,7 +43,7 @@
                                     Претендую на особые права
                                 </label>
                                 <i id="privilegesTooltip" class="fa fa-question-circle"
-                                   onclick="showTooltipMessage()"></i>
+                                   ></i>
                             </div>
                         </div>
                         <div class="row">
@@ -87,64 +87,7 @@
                         </div>
 
 
-                        <div style="display:none">
-                            <div class="form-group">
-                                <div class="col-xs-12">
-                                    <h4>Сертификат ТРКИ</h4>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-xs-12">
-                                    <label>
-                                        <input data-val="true" data-val-required="Требуется поле HasTRKI." id="HasTRKI"
-                                               name="HasTRKI" type="checkbox" value="true"><input name="HasTRKI"
-                                                                                                  type="hidden"
-                                                                                                  value="false">
-                                        Есть сертификат ТРКИ
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                        <div id="_trkiBlock" style="display:none">
-                            <div id="_TRKICertificateNumber" class="form-group">
-                                <div class="col-xs-12">
-                                    <input class="form-control" id="TRKICertificateNumber" name="TRKICertificateNumber"
-                                           placeholder="Номер сертификата" type="text" value="">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-xs-12">
-                                    <label>Уровень владения языком</label>
-                                </div>
-                                <div class="col-xs-12">
-                                    <select class="form-control" data-val="true"
-                                            data-val-number="Значением поля TRKILevelId должно быть число."
-                                            data-val-required="Требуется поле TRKILevelId." id="TRKILevelId"
-                                            name="TRKILevelId">
-                                        <option value="1">ТРКИ-I</option>
-                                        <option value="2">ТРКИ-II</option>
-                                        <option value="3">ТРКИ-III</option>
-                                        <option value="4">ТРКИ-IV</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-xs-12">
-                                    <label>Организация, выдавшая сертификат</label>
-                                </div>
-                                <div class="col-xs-12">
-                                    <select class="form-control" data-val="true"
-                                            data-val-number="Значением поля TRKIIssuerOrg должно быть число."
-                                            data-val-required="Требуется поле TRKIIssuerOrg." id="TRKIIssuerOrg"
-                                            name="TRKIIssuerOrg">
-                                        <option value="1">fff</option>
-                                        <option value="2">РГПУ им. А.И. Герцена</option>
-                                        <option value="3">Гос. ИРЯ им. А.С. Пушкина</option>
-                                        <option value="4">f</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
+
 
                         <div class="form-group">
                             <div class="col-xs-12">

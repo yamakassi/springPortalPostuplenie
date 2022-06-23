@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Set;
+
 @Service
 public class DirectionService {
     @Autowired
@@ -32,15 +34,18 @@ public class DirectionService {
 
     public Direction getDirectionByInstituteAbbr(String instAbbr, String directionName) {
 
-        return instituteService.getInstituteByAbbr(instAbbr).getDirections().stream().filter(x->x.getAbbr().equals(directionName)).findAny().get();
+        return instituteService.getInstituteByAbbr(instAbbr).getDirections().stream().filter(x -> x.getAbbr().equals(directionName)).findAny().get();
 
     }
 
-    public void saveDirection(Direction direction,String instAbbr) {
-       direction.setInstitute(instituteService.getInstituteByAbbr(instAbbr));
+    public void saveDirection(Direction direction, String instAbbr) {
+        direction.setInstitute(instituteService.getInstituteByAbbr(instAbbr));
 
         directionRepo.save(direction);
     }
 
 
+    public Direction findDirection(String abbr) {
+        return directionRepo.findByAbbr(abbr).orElseThrow(() -> new RuntimeException("Не найдено направление"));
+    }
 }

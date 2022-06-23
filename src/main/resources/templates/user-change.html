@@ -1,0 +1,32 @@
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <title>Spring Security Example </title>
+    <div th:replace="fragments/header :: header-css"/>
+</head>
+<body>
+
+<div th:replace="fragments/header :: header"/>
+
+<div class="container mx-auto w-75 align-items-center ">
+
+
+    <h1 style="text-align: center">Редактирование админа  <span th:text="${user.email}"></span></h1><hr>
+    <form th:action="@{/admin/user/edit}" method="post">
+
+        <div th:each="inst:${institutes}">
+            <label th:text="${inst.abbr}"></label><input type="radio" th:value="${inst.abbr}" name="department" th:checked="${user.departament==inst.abbr}" >
+        </div>
+
+    <input type="hidden" th:value="${user.id}" name="userId">
+
+    <button type="submit" class="btn btn-dark">Сохранить</button>
+    </form>
+</div>
+
+    <div th:replace="fragments/footer :: footer"/>
+
+</body>
+</html>

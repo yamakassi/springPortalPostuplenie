@@ -29,17 +29,18 @@ public class InstituteService {
 
     public void saveInstitute(Institute institute, MultipartFile file) throws IOException {
         Image image;
-        if(!file.isEmpty()){
+        if (!file.isEmpty()) {
             image = ImageService.toImageEntity(file);
             institute.setImage(image);
             image.setInstitute(institute);
         }
-        
+
         instituteRepo.save(institute);
     }
+
     @Transactional
     public void delete(String instituteAbbr) {
-      instituteRepo.deleteByAbbr(instituteAbbr);
+        instituteRepo.deleteByAbbr(instituteAbbr);
     }
 
     public Institute getInstituteByAbbr(String abbr) {
@@ -54,5 +55,9 @@ public class InstituteService {
 
         return userRepo.findByEmail(principal.getName()).orElse(new User());
 
+    }
+
+    public List<Institute> getAll() {
+        return instituteRepo.findAll();
     }
 }

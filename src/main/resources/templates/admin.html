@@ -10,41 +10,128 @@
 
 <div class="container">
     <h4>admin</h4>
-    <table>
+    <table class="mb-4">
         <tr>
             <th>Email</th>
-            <th>Номер телефона</th>
-            <th>Активность</th>
+
+            <th>Отдел</th>
             <th>Роли</th>
             <th>Редактирование</th>
-            <th>Подробнее</th>
+
 
         </tr>
 
         <!--<li th:utext="${flower}">..</li>-->
 
+        <tr th:each="user : ${allAdmins}">
+            <th th:text="${user.getEmail()}"></th>
+            <th th:text="${user.getDepartament()}"></th>
 
-                <tr th:each="user : ${allUsers}" >
-                    <th th:text="${user.getEmail()}"></th>
-                    <th th:text="${user.getPhoneNumber()}"></th>
-                    <th th:text="${user.isEnabled()}">active</th> <!--? #{true} : #{false} -->
-                    <!-- <th th:text="${user.getActive()}"></th> -->
-                     <th th:text="${user.getRoles()}">role</th>
-                     <!-- <th th:utext="${user.role}"><#list user.roles as role>${role}</#list></th>-->
-                       <th>
-                           <form th:action="@{/admin/user/disable/{id}(id=${user.getId()})}">
-                               <input type="submit" value="Деактивировать">
-                           </form>
-                       </th>
-                       <th><a th:href="@{/admin/user/edit/{id}(id=${user.getId()})}">Редактирование</a></th>
-                       <th><a th:href="@{/user/{id}(id=${user.getId()})}">Подробнее</a></th>
-                   </tr>-->
+            <!-- <th th:text="${user.getActive()}"></th> -->
+            <th th:text="${user.getRoles()}">role</th>
+            <!-- <th th:utext="${user.role}"><#list user.roles as role>${role}</#list></th>-->
+            <th>
+                <form th:action="@{/admin/user/disable/{id}(id=${user.getId()})}">
+                    <input type="submit" value="Деактивировать">
+                </form>
+            </th>
+            <th><a th:href="@{/admin/user/edit/{id}(id=${user.getId()})}">Редактирование</a></th>
+            <th><a th:href="@{/user/{id}(id=${user.getId()})}">Подробнее</a></th>
+        </tr>
+        -->
 
         <!-- <#else>
          <p>пользователей нет</p>-->
 
     </table>
+    <div class="mx-auto w-50">
+        <h3>Добавить институт</h3>
+        <div>
+            <form th:action="@{/institute/create}" method="post" class="align-items-center b"
+                  enctype="multipart/form-data">
 
+                <div class="col-md-8 col-xs-18">
+                    Название института : <input type="text" name="title" class="form-control">
+                </div>
+                <div class="col-md-8 col-xs-18">
+                    Сокращение института : <input type="text" name="abbr" class="form-control">
+                </div>
+
+                <div class="col-md-8 col-xs-12">
+                    Описание <textarea name="description" class="form-control"></textarea>
+                </div>
+                <div class="col-md-8 col-xs-12">
+                    Директор института : <input type="text" name="director" class="form-control">
+                </div>
+                <div class="col-md-8 col-xs-12">
+                    Контакты звание института : <input type="text" name="contacts" class="form-control">
+                </div>
+
+
+                Фото: <input type="file" name="file" accept=".jpg,.jpeg,.png,.gif">
+
+                <input type="submit" class="btn bg-primary text-white mt-1" value="добавить">
+            </form>
+        </div>
+    </div>
+    <div class="mt-auto w-50" style="margin:0 auto;"><h3>Добавить сотрудника </h3>
+        <div class="form-custom"> <form th:action="@{admin/registration}" method="post">
+
+
+
+            <!-- Name input -->
+            <div class="form-outline mb-2">
+                <label class="form-label" for="registerName">Имя</label>
+                <input type="text" id="registerName" name="name" class="form-control" required/>
+            </div>
+
+            <!-- Username input -->
+            <div class="form-outline mb-2">
+                <label class="form-label" for="registerSurname">Фамилия</label>
+                <input type="text" id="registerSurname" name="surname" class="form-control" required/>
+            </div>
+            <!--  input -->
+            <div class="form-outline mb-2">
+                <label class="form-label" for="registerPatronymic">Отчество</label>
+                <input type="text" id="registerPatronymic" name="patronymic" class="form-control" />
+            </div>
+            <!-- Email input -->
+            <div class="form-outline mb-2">
+                <label class="form-label" for="registerEmail">Email</label>
+                <input type="email" id="registerEmail" name="email" class="form-control" required/>
+            </div>
+
+
+
+
+
+            <!-- Password input -->
+            <div class="form-outline mb-2">
+                <input type="password" name="password" id="registerPassword" class="form-control" required/>
+                <label class="form-label" for="registerPassword">Password</label>
+            </div>
+
+           <div class="form-outline mb-2">
+                <label>Выберите направления:</label>
+                <select   class="form-control select2-hidden-accessible"
+                          id="regionEducId"
+                          name="departament"
+                          tabindex="-1" aria-hidden="true" required/>
+                <option th:each="inst : ${institutes}"
+                        th:value="${inst.abbr}"
+                        th:text="${inst.abbr}"
+
+                >RED
+                </option>
+                </select>
+            </div>
+
+
+
+            <button type="submit" class="btn btn-primary btn-block mb-3">Sign in</button>
+        </form>
+        </div>
+    </div>
 </div>
 
 <div th:replace="fragments/footer :: footer"/>

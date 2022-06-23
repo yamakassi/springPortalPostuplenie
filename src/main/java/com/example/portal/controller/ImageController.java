@@ -18,9 +18,10 @@ import java.io.ByteArrayInputStream;
 @RequiredArgsConstructor
 public class ImageController {
     private final ImageRepo imageRepo;
+
     @Transactional
     @GetMapping("/images/{id}")
-     ResponseEntity<?> getImageById(@PathVariable Long id) {
+    ResponseEntity<?> getImageById(@PathVariable Long id) {
         Image image = imageRepo.findById(id).orElse(null);
         return ResponseEntity.ok()
                 .header("fileName", image.getOriginalFileName())

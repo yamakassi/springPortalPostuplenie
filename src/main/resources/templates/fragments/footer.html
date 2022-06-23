@@ -5,17 +5,12 @@
 </head>
 <body>
 <div th:fragment="footer">
-    <footer class="main-footer">
-        <div class="pull-right hidden-xs">
+    <footer class="main-footer footer align-content-center" data-spy="affix">
+        <div class="align-content-center hidden-xs">
             Приёмная комиссия  <b>Телефон</b>:+7 (999) 800 90 93<b> E-mail</b>:portal@portal.ru
         </div>
         © 2022
 
-            <!-- FOOTER -->
-            <!-- Благодаря дополнительной библиотеке которую мы опционально подключали в pom мы моежм использовать
-            вспомогательные теги и без особых трудностей выводить имя пользователя на странице
-            ВАЖНО! Старайтесь писать на английском, даже если не имеете подобного опыта(переводчик),
-            это сэкономит вам нервы(проблемы с кодировками, фильтры) и даст бесценный опыт в будущем -->
 
                <span sec:authorize="isAuthenticated()">| Logged user: <span sec:authentication="name"></span> |
                 Roles: <span sec:authentication="principal.authorities"></span> |
@@ -31,6 +26,7 @@
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.min.js" integrity="sha384-skAcpIdS7UcVUC05LJ9Dxay8AXcDYfBJqt1CJ85S/CFujBsIzCIv+l9liuYLaMQ/" crossorigin="anonymous"></script>
             <script  src="https://use.fontawesome.com/releases/v5.0.13/js/all.js"></script>
             <script th:src="@{/js/script.js}" src=/static/js/script.js""></script>
+
 
         </footer>
 

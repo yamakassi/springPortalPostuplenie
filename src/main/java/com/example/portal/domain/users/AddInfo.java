@@ -17,4 +17,6 @@ public class AddInfo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+
 }

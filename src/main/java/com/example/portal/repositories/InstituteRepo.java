@@ -8,6 +8,7 @@ import java.util.Optional;
 public interface InstituteRepo extends JpaRepository<Institute, Long> {
 
     Optional<Institute> findByAbbr(String abbr);
+
     void deleteByAbbr(String abbr);
 }
 
